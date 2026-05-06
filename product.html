@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail produktu — Korálky &amp; Šperky</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Product Detail Layout ── */
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      padding: 3rem 0 5rem;
+    }
+
+    /* ── Gallery ── */
+    .gallery { position: sticky; top: 96px; }
+    .gallery__main {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--sand);
+      margin-bottom: .75rem;
+    }
+    .gallery__main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: opacity .3s ease;
+    }
+    .gallery__thumbs {
+      display: flex;
+      gap: .5rem;
+    }
+    .gallery__thumb {
+      width: 72px; height: 72px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color var(--transition);
+      flex-shrink: 0;
+    }
+    .gallery__thumb.active { border-color: var(--gold); }
+    .gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── Info ── */
+    .product-info__category {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: .5rem;
+    }
+    .product-info__name { margin-bottom: .5rem; }
+    .product-info__price {
+      font-size: 1.6rem;
+      font-family: var(--font-serif);
+      color: var(--gold-dark);
+      margin-bottom: 1rem;
+    }
+    .product-info__desc {
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .detail-row label {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      min-width: 80px;
+    }
+
+    .add-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .product-meta {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: .82rem;
+      color: var(--text-light);
+    }
+    .product-meta strong { color: var(--text-mid); }
+
+    /* ── Stock badge ── */
+    .stock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .75rem;
+      font-weight: 500;
+      padding: .3rem .75rem;
+      border-radius: 2rem;
+    }
+    .stock-badge--in  { background: rgba(122,140,110,.12); color: var(--sage); }
+    .stock-badge--out { background: rgba(192,57,43,.08); color: #c0392b; }
+    .stock-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ── Shipping info ── */
+    .shipping-info {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      font-size: .82rem;
+      color: var(--text-mid);
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-top: 1rem;
+    }
+    .shipping-info span { display: flex; align-items: center; gap: .5rem; }
+
+    /* ── Related ── */
+    .related { padding: 4rem 0; background: var(--white); }
+    .related h2 { text-align: center; margin-bottom: 2rem; }
+
+    /* ── Skeleton loader ── */
+    @keyframes shimmer {
+      0%   { background-position: -600px 0; }
+      100% { background-position: 600px 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, var(--sand) 25%, var(--cream) 50%, var(--sand) 75%);
+      background-size: 600px 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: var(--radius);
+    }
+    .skel-img  { aspect-ratio: 1/1; border-radius: var(--radius-lg); }
+    .skel-line { height: 1rem; margin-bottom: .6rem; }
+    .skel-line--lg { height: 2.5rem; }
+    .skel-line--sm { height: .75rem; width: 60%; }
+
+    @media (max-width: 768px) {
+      .product-detail { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery { position: static; }
+      .add-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" id="breadcrumb">
+        <a href="index.html">Kolekce</a>
+        <span>›</span>
+        <span id="bc-category">…</span>
+        <span>›</span>
+        <span id="bc-name">…</span>
+      </nav>
+
+      <!-- Product detail -->
+      <div class="product-detail" id="product-detail">
+        <!-- Skeleton -->
+        <div>
+          <div class="skeleton skel-img"></div>
+          <div style="display:flex;gap:.5rem;margin-top:.75rem">
+            <div class="skeleton" style="width:72px;height:72px;border-radius:4px"></div>
+            <div class="skeleton" style="width:72px;height:72px;border-radius:4px"></div>
+          </div>
+        </div>
+        <div>
+          <div class="skeleton skel-line skel-line--sm" style="margin-bottom:1rem"></div>
+          <div class="skeleton skel-line skel-line--lg" style="margin-bottom:.75rem"></div>
+          <div class="skeleton skel-line" style="width:35%"></div>
+          <div style="margin-top:2rem">
+            <div class="skeleton skel-line"></div>
+            <div class="skeleton skel-line"></div>
+            <div class="skeleton skel-line skel-line--sm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related products -->
+    <section class="related" id="related" style="display:none">
+      <div class="container">
+        <span class="section-label text-center" style="text-align:center;display:block">Mohlo by se líbit</span>
+        <h2>Související šperky</h2>
+        <div class="product-grid" id="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    let currentProduct = null;
+
+    async function initProductPage() {
+      const id = getParam('id');
+      if (!id) { window.location.href = 'index.html'; return; }
+
+      const product = await getProduct(id);
+      if (!product) {
+        document.getElementById('product-detail').innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1;padding:5rem 0">
+            <div class="empty-state__icon">🔍</div>
+            <h3>Produkt nenalezen</h3>
+            <p>Tento produkt neexistuje nebo byl odstraněn.</p>
+            <a href="index.html" class="btn btn-primary mt-2">Zpět na kolekci</a>
+          </div>`;
+        return;
+      }
+
+      currentProduct = product;
+      document.title = `${product.name} — Korálky & Šperky`;
+      document.getElementById('bc-category').textContent = product.category || 'Produkt';
+      document.getElementById('bc-name').textContent = product.name;
+
+      renderProduct(product);
+      loadRelated(product);
+    }
+
+    function renderProduct(p) {
+      const images = p.images || (p.image ? [p.image] : ['https://via.placeholder.com/600x600?text=Foto+brzy']);
+      const inStock = p.inStock !== false;
+
+      const thumbsHtml = images.length > 1
+        ? images.map((src, i) => `
+            <button class="gallery__thumb ${i === 0 ? 'active' : ''}"
+                    onclick="changeImage(${i})"
+                    aria-label="Náhled ${i+1}">
+              <img src="${src}" alt="${p.name} ${i+1}">
+            </button>`).join('')
+        : '';
+
+      const stockBadge = inStock
+        ? `<span class="stock-badge stock-badge--in">Skladem</span>`
+        : `<span class="stock-badge stock-badge--out">Vyprodáno</span>`;
+
+      document.getElementById('product-detail').innerHTML = `
+        <!-- Gallery -->
+        <div class="gallery">
+          <div class="gallery__main">
+            <img id="main-img" src="${images[0]}" alt="${p.name}">
+          </div>
+          ${thumbsHtml ? `<div class="gallery__thumbs">${thumbsHtml}</div>` : ''}
+        </div>
+
+        <!-- Info -->
+        <div class="product-info">
+          <p class="product-info__category">${p.category || ''}</p>
+          <h1 class="product-info__name">${p.name}</h1>
+          <p class="product-info__price">${formatPrice(p.price)}</p>
+          ${stockBadge}
+
+          <p class="product-info__desc" style="margin-top:1rem">${p.description}</p>
+
+          <!-- Qty + Add -->
+          <div class="detail-row">
+            <label>Množství</label>
+            <div class="qty-stepper">
+              <button onclick="adjustQty(-1)">−</button>
+              <input type="number" id="qty-input" value="1" min="1" max="99">
+              <button onclick="adjustQty(1)">+</button>
+            </div>
+          </div>
+
+          <div class="add-row">
+            <button class="btn btn-primary btn-lg"
+                    id="add-btn"
+                    ${!inStock ? 'disabled' : ''}
+                    onclick="addToCart()">
+              ${inStock ? 'Přidat do košíku' : 'Vyprodáno'}
+            </button>
+            <a href="cart.html" class="btn btn-outline btn-lg">Zobrazit košík</a>
+          </div>
+
+          <!-- Shipping info -->
+          <div class="shipping-info">
+            <span>🚚 Doprava zdarma nad ${formatPrice(CONFIG.FREE_SHIPPING_THRESHOLD)}</span>
+            <span>📦 Expedice do 2 pracovních dnů</span>
+            <span>🎁 Krásné dárkové balení zdarma</span>
+          </div>
+
+          <!-- Meta -->
+          <div class="product-meta">
+            ${p.material ? `<p><strong>Materiál:</strong> ${p.material}</p>` : ''}
+            ${p.care     ? `<p style="margin-top:.4rem"><strong>Péče:</strong> ${p.care}</p>` : ''}
+          </div>
+        </div>`;
+    }
+
+    function changeImage(index) {
+      const images = currentProduct?.images || [];
+      if (!images[index]) return;
+      const img = document.getElementById('main-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = images[index];
+        img.style.opacity = '1';
+      }, 200);
+      document.querySelectorAll('.gallery__thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === index);
+      });
+    }
+
+    function adjustQty(delta) {
+      const input = document.getElementById('qty-input');
+      const newVal = Math.max(1, Math.min(99, Number(input.value) + delta));
+      input.value = newVal;
+    }
+
+    function addToCart() {
+      if (!currentProduct) return;
+      const qty = Number(document.getElementById('qty-input').value) || 1;
+      Cart.add(currentProduct, qty);
+    }
+
+    async function loadRelated(current) {
+      const all = await loadProducts();
+      const related = all
+        .filter(p => p.id !== current.id && p.category === current.category && p.inStock !== false)
+        .slice(0, 4);
+
+      if (!related.length) return;
+
+      const section = document.getElementById('related');
+      const grid = document.getElementById('related-grid');
+      section.style.display = 'block';
+
+      grid.innerHTML = related.map(p => `
+        <article class="product-card">
+          <a href="product.html?id=${p.id}" class="product-card__img">
+            ${p.badge ? `<span class="product-card__badge">${p.badge}</span>` : ''}
+            <img src="${p.images?.[0] || ''}" alt="${p.name}" loading="lazy">
+          </a>
+          <div class="product-card__body">
+            <p class="product-card__category">${p.category}</p>
+            <h3 class="product-card__name">
+              <a href="product.html?id=${p.id}">${p.name}</a>
+            </h3>
+            <p class="product-card__price">${formatPrice(p.price)}</p>
+            <button class="btn btn-primary btn-sm btn-full"
+                    data-add-to-cart="${p.id}">Do košíku</button>
+          </div>
+        </article>`).join('');
+
+      initProductCards();
+    }
+
+    document.addEventListener('DOMContentLoaded', initProductPage);
+  </script>
+</body>
+</html>
