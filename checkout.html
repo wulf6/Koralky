@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokladna — Korálky &amp; Šperky</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 2.5rem 0 5rem;
+    }
+
+    /* ── Steps ── */
+    .steps {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2rem;
+    }
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: .75rem .5rem;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      border-bottom: 2px solid var(--border);
+      position: relative;
+    }
+    .step.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .step.done {
+      color: var(--sage);
+      border-bottom-color: var(--sage);
+    }
+    .step__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--text-light);
+      font-size: .7rem;
+      margin-right: .4rem;
+    }
+    .step.active .step__num { background: var(--gold); color: var(--white); }
+    .step.done  .step__num  { background: var(--sage); color: var(--white); }
+
+    /* ── Section blocks ── */
+    .checkout-block {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .checkout-block h3 {
+      font-family: var(--font-serif);
+      margin-bottom: 1.25rem;
+      padding-bottom: .875rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Shipping options ── */
+    .shipping-options {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .shipping-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .shipping-option:hover { border-color: var(--gold); }
+    .shipping-option input[type="radio"] { accent-color: var(--gold); }
+    .shipping-option.selected {
+      border-color: var(--gold);
+      background: rgba(184,151,90,.04);
+    }
+    .shipping-option__label { flex: 1; }
+    .shipping-option__name {
+      font-weight: 500;
+      font-size: .9rem;
+      color: var(--text);
+      display: block;
+    }
+    .shipping-option__desc {
+      font-size: .78rem;
+      color: var(--text-light);
+    }
+    .shipping-option__price {
+      font-weight: 500;
+      color: var(--gold-dark);
+      font-size: .9rem;
+    }
+    .shipping-option__price.free { color: var(--sage); }
+
+    /* ── Payment options ── */
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .payment-option:hover { border-color: var(--gold); }
+    .payment-option input[type="radio"] { accent-color: var(--gold); }
+    .payment-option.selected {
+      border-color: var(--gold);
+      background: rgba(184,151,90,.04);
+    }
+    .payment-option__icon { font-size: 1.4rem; }
+    .payment-option__name {
+      font-weight: 500;
+      font-size: .9rem;
+      color: var(--text);
+    }
+    .payment-option__desc {
+      font-size: .78rem;
+      color: var(--text-light);
+    }
+
+    /* ── Order summary sidebar ── */
+    .order-summary {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 96px;
+    }
+    .order-summary h3 {
+      font-family: var(--font-serif);
+      margin-bottom: 1.25rem;
+      padding-bottom: .875rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .order-item {
+      display: flex;
+      gap: .875rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .order-item__img {
+      width: 52px; height: 52px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--sand);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .order-item__img img { width: 100%; height: 100%; object-fit: cover; }
+    .order-item__qty {
+      position: absolute;
+      top: -6px; right: -6px;
+      width: 18px; height: 18px;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 50%;
+      font-size: .6rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .order-item__name { font-size: .85rem; flex: 1; color: var(--text); }
+    .order-item__price { font-size: .85rem; font-weight: 500; color: var(--gold-dark); }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: .85rem;
+      color: var(--text-mid);
+      margin-bottom: .5rem;
+    }
+    .summary-line--total {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .summary-line--total span:last-child {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--gold-dark);
+    }
+
+    /* ── Submit ── */
+    .submit-block {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+      font-size: .82rem;
+      color: var(--text-mid);
+    }
+    .terms-check input { accent-color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+    .terms-check a { color: var(--gold); text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .checkout-layout { grid-template-columns: 1fr; }
+      .order-summary { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+    <div class="page-banner">
+      <div class="container">
+        <span class="section-label">Dokončení objednávky</span>
+        <h1>Pokladna</h1>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Steps -->
+      <div class="steps">
+        <div class="step done">
+          <span class="step__num">✓</span>Košík
+        </div>
+        <div class="step active">
+          <span class="step__num">2</span>Doručení
+        </div>
+        <div class="step">
+          <span class="step__num">3</span>Potvrzení
+        </div>
+      </div>
+
+      <div class="checkout-layout">
+        <!-- Left: Form -->
+        <div>
+          <!--
+            FORMSPREE: Nahraď YOUR_FORM_ID za tvůj endpoint
+            Např.: https://formspree.io/f/xabcdefg
+          -->
+          <form id="checkout-form"
+                action="https://formspree.io/f/YOUR_FORM_ID"
+                method="POST">
+
+            <!-- Skrytá pole — košík data -->
+            <input type="hidden" name="_subject" value="Nová objednávka — Korálky & Šperky">
+            <input type="hidden" name="_next" value="thankyou.html">
+            <input type="hidden" name="cart_data" id="cart-data-field">
+            <input type="hidden" name="shipping_method" id="shipping-field" value="zasilkovna">
+            <input type="hidden" name="payment_method" id="payment-field" value="bank">
+            <input type="hidden" name="order_total" id="total-field">
+
+            <!-- Kontaktní údaje -->
+            <div class="checkout-block">
+              <h3>📋 Kontaktní údaje</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="first-name">Jméno *</label>
+                  <input class="form-input" type="text" id="first-name"
+                         name="first_name" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="last-name">Příjmení *</label>
+                  <input class="form-input" type="text" id="last-name"
+                         name="last_name" required autocomplete="family-name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">E-mail *</label>
+                <input class="form-input" type="email" id="email"
+                       name="email" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Telefon *</label>
+                <input class="form-input" type="tel" id="phone"
+                       name="phone" required autocomplete="tel"
+                       placeholder="+420 ">
+              </div>
+            </div>
+
+            <!-- Doručovací adresa -->
+            <div class="checkout-block" id="address-block">
+              <h3>📦 Doručovací adresa</h3>
+              <div class="form-group">
+                <label class="form-label" for="street">Ulice a číslo *</label>
+                <input class="form-input" type="text" id="street"
+                       name="street" required autocomplete="street-address">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="city">Město *</label>
+                  <input class="form-input" type="text" id="city"
+                         name="city" required autocomplete="address-level2">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="zip">PSČ *</label>
+                  <input class="form-input" type="text" id="zip"
+                         name="zip" required autocomplete="postal-code"
+                         pattern="[0-9 ]{5,6}" placeholder="123 45">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="note">Poznámka k objednávce</label>
+                <textarea class="form-textarea" id="note" name="note"
+                          placeholder="Např. „Přidat dárkovou kartičku se jménem…""></textarea>
+              </div>
+            </div>
+
+            <!-- Způsob dopravy -->
+            <div class="checkout-block">
+              <h3>🚚 Způsob dopravy</h3>
+              <div class="shipping-options" id="shipping-options"></div>
+            </div>
+
+            <!-- Způsob platby -->
+            <div class="checkout-block">
+              <h3>💳 Způsob platby</h3>
+              <div class="payment-options">
+                <label class="payment-option selected" id="pay-bank">
+                  <input type="radio" name="payment" value="bank" checked
+                         onchange="selectPayment(this)">
+                  <span class="payment-option__icon">🏦</span>
+                  <div>
+                    <span class="payment-option__name">Bankovní převod</span>
+                    <span class="payment-option__desc">Odešleme po přijetí platby (1–2 dny)</span>
+                  </div>
+                </label>
+                <label class="payment-option" id="pay-dobir">
+                  <input type="radio" name="payment" value="cod"
+                         onchange="selectPayment(this)">
+                  <span class="payment-option__icon">💵</span>
+                  <div>
+                    <span class="payment-option__name">Dobírka (+39 Kč)</span>
+                    <span class="payment-option__desc">Platba hotově při převzetí zásilky</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Podmínky + odeslání -->
+            <div class="submit-block">
+              <div class="terms-check">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">
+                  Souhlasím s <a href="#">obchodními podmínkami</a> a
+                  <a href="#">zásadami ochrany osobních údajů</a>.
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-full" id="submit-btn">
+                Odeslat objednávku
+              </button>
+              <p style="text-align:center;font-size:.75rem;color:var(--text-light);margin-top:.75rem">
+                🔒 Vaše údaje jsou v bezpečí. Neprodáváme je třetím stranám.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <aside class="order-summary">
+          <h3>Vaše objednávka</h3>
+          <div id="order-items"></div>
+          <div style="border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem">
+            <div class="summary-line">
+              <span>Mezisoučet</span>
+              <span id="sum-subtotal"></span>
+            </div>
+            <div class="summary-line">
+              <span>Doprava</span>
+              <span id="sum-shipping"></span>
+            </div>
+            <div class="summary-line" id="sum-cod-row" style="display:none">
+              <span>Dobírka</span>
+              <span>+39 Kč</span>
+            </div>
+            <div class="summary-line summary-line--total">
+              <span>Celkem</span>
+              <span id="sum-total"></span>
+            </div>
+          </div>
+          <a href="cart.html" style="display:block;text-align:center;
+             font-size:.78rem;color:var(--text-light);margin-top:1rem;
+             transition:color .2s" onmouseover="this.style.color='var(--gold)'"
+             onmouseout="this.style.color='var(--text-light)'">
+            ← Upravit košík
+          </a>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    let selectedShipping = CONFIG.SHIPPING[0];
+    let isCOD = false;
+
+    function initCheckout() {
+      const items = Cart.get();
+      if (!items.length) {
+        window.location.href = 'cart.html';
+        return;
+      }
+
+      renderOrderItems(items);
+      renderShippingOptions();
+      updateSummary();
+      prefillCartData(items);
+    }
+
+    function renderOrderItems(items) {
+      document.getElementById('order-items').innerHTML = items.map(item => `
+        <div class="order-item">
+          <div class="order-item__img">
+            <img src="${item.image || ''}" alt="${item.name}">
+            <span class="order-item__qty">${item.qty}</span>
+          </div>
+          <span class="order-item__name">${item.name}</span>
+          <span class="order-item__price">${formatPrice(item.price * item.qty)}</span>
+        </div>`).join('');
+    }
+
+    function renderShippingOptions() {
+      const subtotal = Cart.subtotal();
+      const container = document.getElementById('shipping-options');
+
+      container.innerHTML = CONFIG.SHIPPING.map(opt => {
+        const free = subtotal >= CONFIG.FREE_SHIPPING_THRESHOLD;
+        const price = free ? 0 : opt.price;
+        const priceLabel = price === 0
+          ? `<span class="shipping-option__price free">Zdarma</span>`
+          : `<span class="shipping-option__price">${formatPrice(price)}</span>`;
+        const selected = opt.id === selectedShipping.id ? 'selected' : '';
+
+        return `
+          <label class="shipping-option ${selected}" data-id="${opt.id}">
+            <input type="radio" name="shipping" value="${opt.id}"
+                   ${opt.id === selectedShipping.id ? 'checked' : ''}
+                   onchange="selectShipping('${opt.id}')">
+            <div class="shipping-option__label">
+              <span class="shipping-option__name">${opt.name}</span>
+              <span class="shipping-option__desc">
+                ${opt.id === 'osobni' ? 'Domluvíme se na místě' : 'Doručení 2–4 pracovní dny'}
+              </span>
+            </div>
+            ${priceLabel}
+          </label>`;
+      }).join('');
+
+      /* Skrýt adresu při osobním odběru */
+      toggleAddressBlock();
+    }
+
+    function selectShipping(id) {
+      selectedShipping = CONFIG.SHIPPING.find(s => s.id === id);
+      document.getElementById('shipping-field').value = selectedShipping.name;
+
+      document.querySelectorAll('.shipping-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.id === id);
+      });
+
+      toggleAddressBlock();
+      updateSummary();
+    }
+
+    function selectPayment(radio) {
+      isCOD = radio.value === 'cod';
+      document.getElementById('payment-field').value = radio.value;
+
+      document.querySelectorAll('.payment-option').forEach(el => {
+        el.classList.toggle('selected', el.contains(radio));
+      });
+
+      document.getElementById('sum-cod-row').style.display = isCOD ? 'flex' : 'none';
+      updateSummary();
+    }
+
+    function toggleAddressBlock() {
+      const block = document.getElementById('address-block');
+      const hide = selectedShipping?.id === 'osobni';
+      block.style.display = hide ? 'none' : 'block';
+
+      block.querySelectorAll('[required]').forEach(el => {
+        el.required = !hide;
+      });
+    }
+
+    function updateSummary() {
+      const subtotal = Cart.subtotal();
+      const free = subtotal >= CONFIG.FREE_SHIPPING_THRESHOLD;
+      const shippingCost = free ? 0 : (selectedShipping?.price || 0);
+      const codFee = isCOD ? 39 : 0;
+      const total = subtotal + shippingCost + codFee;
+
+      document.getElementById('sum-subtotal').textContent = formatPrice(subtotal);
+      document.getElementById('sum-shipping').textContent =
+        shippingCost === 0 ? 'Zdarma' : formatPrice(shippingCost);
+      document.getElementById('sum-total').textContent = formatPrice(total);
+      document.getElementById('total-field').value = formatPrice(total);
+    }
+
+    function prefillCartData(items) {
+      const text = items.map(i =>
+        `${i.name} × ${i.qty} = ${formatPrice(i.price * i.qty)}`
+      ).join('\n');
+      document.getElementById('cart-data-field').value = text;
+    }
+
+    /* Handle form submit loading state */
+    document.addEventListener('DOMContentLoaded', () => {
+      initCheckout();
+
+      const form = document.getElementById('checkout-form');
+      form.addEventListener('submit', (e) => {
+        const btn = document.getElementById('submit-btn');
+        btn.textContent = 'Odesílám…';
+        btn.disabled = true;
+        /* Formspree přesměruje na thankyou.html přes _next */
+      });
+    });
+  </script>
+</body>
+</html>
