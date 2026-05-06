@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Košík — Korálky &amp; Šperky</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 2.5rem 0 5rem;
+    }
+
+    /* ── Cart Items ── */
+    .cart-items { display: flex; flex-direction: column; gap: 1rem; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 88px 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition);
+    }
+    .cart-item:hover { box-shadow: var(--shadow-md); }
+
+    .cart-item__img {
+      width: 88px; height: 88px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--sand);
+      flex-shrink: 0;
+    }
+    .cart-item__img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .cart-item__name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      margin-bottom: .2rem;
+      color: var(--text);
+    }
+    .cart-item__name a { transition: color var(--transition); }
+    .cart-item__name a:hover { color: var(--gold); }
+
+    .cart-item__unit-price {
+      font-size: .8rem;
+      color: var(--text-light);
+      margin-bottom: .75rem;
+    }
+
+    .cart-item__controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cart-item__remove {
+      color: var(--text-light);
+      font-size: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+    .cart-item__remove:hover { color: #c0392b; }
+
+    .cart-item__total {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gold-dark);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ── Summary Box ── */
+    .cart-summary {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 96px;
+    }
+    .cart-summary h3 {
+      font-family: var(--font-serif);
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .9rem;
+      margin-bottom: .75rem;
+      color: var(--text-mid);
+    }
+    .summary-row--total {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .summary-row--total .amount {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--gold-dark);
+    }
+
+    .free-shipping-bar {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: .75rem 1rem;
+      margin: 1rem 0;
+      font-size: .8rem;
+      color: var(--text-mid);
+    }
+    .free-shipping-bar__track {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: .5rem;
+      overflow: hidden;
+    }
+    .free-shipping-bar__fill {
+      height: 100%;
+      background: var(--sage);
+      border-radius: 2px;
+      transition: width .5s ease;
+    }
+
+    .coupon-row {
+      display: flex;
+      gap: .5rem;
+      margin: 1rem 0;
+    }
+    .coupon-row input {
+      flex: 1;
+      padding: .6rem .875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-sans);
+      font-size: .85rem;
+      background: var(--cream);
+    }
+    .coupon-row input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    @media (max-width: 900px) {
+      .cart-layout { grid-template-columns: 1fr; }
+      .cart-summary { position: static; }
+    }
+    @media (max-width: 600px) {
+      .cart-item { grid-template-columns: 64px 1fr; }
+      .cart-item__total { grid-column: 2; }
+      .cart-item__img { width: 64px; height: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+    <div class="page-banner">
+      <div class="container">
+        <span class="section-label">Váš výběr</span>
+        <h1>Košík</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="cart-layout">
+
+        <!-- Položky -->
+        <div>
+          <div id="cart-items"></div>
+        </div>
+
+        <!-- Shrnutí -->
+        <aside class="cart-summary" id="cart-summary" style="display:none">
+          <h3>Shrnutí objednávky</h3>
+
+          <div class="summary-row">
+            <span>Mezisoučet</span>
+            <span id="subtotal">0 Kč</span>
+          </div>
+          <div class="summary-row" id="shipping-row">
+            <span>Doprava</span>
+            <span id="shipping-val">—</span>
+          </div>
+
+          <!-- Free shipping progress -->
+          <div class="free-shipping-bar" id="free-bar">
+            <span id="free-bar-text"></span>
+            <div class="free-shipping-bar__track">
+              <div class="free-shipping-bar__fill" id="free-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="summary-row summary-row--total">
+            <span>Celkem</span>
+            <span class="amount" id="total">0 Kč</span>
+          </div>
+
+          <!-- Kupon -->
+          <div class="coupon-row">
+            <input type="text" id="coupon-input" placeholder="Slevový kód">
+            <button class="btn btn-outline btn-sm" onclick="applyCoupon()">Použít</button>
+          </div>
+
+          <a href="checkout.html" class="btn btn-primary btn-lg btn-full" id="checkout-btn">
+            Přejít k pokladně
+          </a>
+          <a href="index.html" class="btn btn-outline btn-full mt-1"
+             style="margin-top:.75rem">
+            ← Pokračovat v nákupu
+          </a>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    function renderCart() {
+      const items = Cart.get();
+      const container = document.getElementById('cart-items');
+      const summary   = document.getElementById('cart-summary');
+
+      if (!items.length) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state__icon">🛒</div>
+            <h3>Váš košík je prázdný</h3>
+            <p>Přidejte si něco krásného z naší kolekce.</p>
+            <a href="index.html" class="btn btn-primary mt-2">Prohlédnout kolekci</a>
+          </div>`;
+        summary.style.display = 'none';
+        return;
+      }
+
+      summary.style.display = 'block';
+
+      container.innerHTML = items.map(item => `
+        <div class="cart-item" data-id="${item.id}">
+          <div class="cart-item__img">
+            <a href="product.html?id=${item.id}">
+              <img src="${item.image || ''}" alt="${item.name}">
+            </a>
+          </div>
+          <div class="cart-item__body">
+            <p class="cart-item__name">
+              <a href="product.html?id=${item.id}">${item.name}</a>
+            </p>
+            <p class="cart-item__unit-price">${formatPrice(item.price)} / ks</p>
+            <div class="cart-item__controls">
+              <div class="qty-stepper">
+                <button onclick="updateQty(${item.id}, ${item.qty - 1})">−</button>
+                <input type="number" value="${item.qty}" min="1" max="99"
+                       onchange="updateQty(${item.id}, this.value)">
+                <button onclick="updateQty(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <button class="cart-item__remove" onclick="removeItem(${item.id})">
+                ✕ Odebrat
+              </button>
+            </div>
+          </div>
+          <div class="cart-item__total">${formatPrice(item.price * item.qty)}</div>
+        </div>`).join('');
+
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const subtotal = Cart.subtotal();
+      const threshold = CONFIG.FREE_SHIPPING_THRESHOLD;
+      const freeShipping = subtotal >= threshold;
+      const shipping = freeShipping ? 0 : 79;
+      const total = subtotal + shipping;
+      const remaining = threshold - subtotal;
+      const pct = Math.min(100, (subtotal / threshold) * 100);
+
+      document.getElementById('subtotal').textContent    = formatPrice(subtotal);
+      document.getElementById('shipping-val').textContent =
+        freeShipping ? 'Zdarma 🎉' : formatPrice(shipping);
+      document.getElementById('total').textContent       = formatPrice(total);
+
+      const barText = freeShipping
+        ? '✓ Doprava zdarma!'
+        : `Přidej ještě ${formatPrice(remaining)} pro dopravu zdarma`;
+      document.getElementById('free-bar-text').textContent = barText;
+      document.getElementById('free-bar-fill').style.width = `${pct}%`;
+    }
+
+    function updateQty(id, qty) {
+      Cart.setQty(id, Number(qty));
+      renderCart();
+    }
+
+    function removeItem(id) {
+      Cart.remove(id);
+      renderCart();
+      showToast('Položka odebrána z košíku');
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      if (code === 'VITEJTE10') {
+        showToast('Slevový kód uplatněn: -10% 🎉', 'success');
+      } else {
+        showToast('Neplatný slevový kód', 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>
