@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korálky &amp; Šperky — Ručně vyráběné šperky</title>
+  <meta name="description" content="Ručně vyráběné šperky z přírodních kamenů. Náramky, náhrdelníky, náušnice a sady.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--sand);
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(245,240,232,.96) 45%, transparent 75%);
+      z-index: 1;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center right;
+      opacity: .7;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+    }
+    .hero__content h1 { margin-bottom: 1rem; }
+    .hero__content p  { font-size: 1rem; margin-bottom: 2rem; max-width: 380px; }
+    .hero__actions    { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── Proč my ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    .why-item__icon {
+      width: 52px; height: 52px;
+      background: var(--sand);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.4rem;
+    }
+    .why-item h4 { font-family: var(--font-serif); margin-bottom: .4rem; }
+    .why-item p  { font-size: .82rem; color: var(--text-light); }
+
+    /* ── Filters ── */
+    .filters {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      padding: .45rem 1.1rem;
+      border-radius: 2rem;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    /* ── Out-of-stock overlay ── */
+    .product-card--soldout .product-card__img::after {
+      content: 'Vyprodáno';
+      position: absolute;
+      inset: 0;
+      background: rgba(44,36,24,.45);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cream);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .product-card--soldout .btn { opacity: .5; cursor: not-allowed; pointer-events: none; }
+
+    /* ── Newsletter strip ── */
+    .newsletter {
+      background: var(--text);
+      color: var(--cream);
+      padding: 3rem 0;
+    }
+    .newsletter-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .newsletter h3 { font-family: var(--font-serif); color: var(--sand); }
+    .newsletter p  { color: var(--text-light); font-size: .85rem; }
+    .newsletter-form {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .newsletter-form input {
+      padding: .75rem 1rem;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.08);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: .85rem;
+      min-width: 220px;
+    }
+    .newsletter-form input::placeholder { color: rgba(232,220,200,.4); }
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header (inject) -->
+  <div id="site-header"></div>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <img class="hero__bg"
+           src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1200&q=80"
+           alt="Kolekce šperků">
+      <div class="container">
+        <div class="hero__content">
+          <span class="section-label">Ručně vyráběné</span>
+          <h1>Šperky s&nbsp;duší<br><em>i příběhem</em></h1>
+          <p>Každý náramek, náhrdelník a náušnice vznikají ručně z přírodních kamenů
+             — s láskou a pozorností k&nbsp;detailu.</p>
+          <div class="hero__actions">
+            <a href="#kolekce" class="btn btn-primary btn-lg">Prohlédnout kolekci</a>
+            <a href="#proc-my" class="btn btn-outline btn-lg">Proč nás vybrat</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proč my -->
+    <section class="section--sm" id="proc-my" style="background:var(--white);">
+      <div class="container">
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-item__icon">🤲</div>
+            <h4>Ruční práce</h4>
+            <p>Každý kus vyráběn ručně, žádná sériová výroba.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-item__icon">💎</div>
+            <h4>Kvalitní materiály</h4>
+            <p>Přírodní kameny, pozlacená ocel, říční perly.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-item__icon">🎁</div>
+            <h4>Dárkové balení</h4>
+            <p>Vše odesíláme krásně zabalené, připravené na darování.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-item__icon">🚚</div>
+            <h4>Rychlé odeslání</h4>
+            <p>Doprava zdarma nad 1 200 Kč, expedice do 2 dnů.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kolekce -->
+    <section class="section" id="kolekce">
+      <div class="container">
+        <div class="text-center mb-3">
+          <span class="section-label">Naše tvorba</span>
+          <h2>Celá kolekce</h2>
+        </div>
+
+        <!-- Filtry -->
+        <div class="filters" id="filters">
+          <button class="filter-btn active" data-filter="all">Vše</button>
+          <button class="filter-btn" data-filter="Náramky">Náramky</button>
+          <button class="filter-btn" data-filter="Náhrdelníky">Náhrdelníky</button>
+          <button class="filter-btn" data-filter="Náušnice">Náušnice</button>
+          <button class="filter-btn" data-filter="Sady">Sady</button>
+        </div>
+
+        <!-- Grid -->
+        <div class="product-grid" id="product-grid">
+          <div class="empty-state">
+            <div class="empty-state__icon">✦</div>
+            <p>Načítám kolekci…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+      <div class="container">
+        <div class="newsletter-inner">
+          <div>
+            <h3>Novinky přímo do schránky</h3>
+            <p>Nové kousky, slevy a inspirace — přihlaste se k odběru.</p>
+          </div>
+          <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+            <input type="email" placeholder="váš@email.cz" required>
+            <button type="submit" class="btn btn-primary">Přihlásit</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (inject) -->
+  <div id="site-footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    /* ── Inicializace kolekce ─────────────────────────────── */
+    let allProducts = [];
+    let activeFilter = 'all';
+
+    async function initShop() {
+      allProducts = await loadProducts();
+      renderGrid(allProducts);
+      initFilters();
+    }
+
+    function renderGrid(products) {
+      const grid = document.getElementById('product-grid');
+      if (!products.length) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <div class="empty-state__icon">🔍</div>
+            <h3>Žádné produkty nenalezeny</h3>
+            <p>Zkuste jiný filtr.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = products.map(p => {
+        const soldout = !p.inStock ? ' product-card--soldout' : '';
+        const badge = p.badge
+          ? `<span class="product-card__badge">${p.badge}</span>` : '';
+        const btnDisabled = !p.inStock ? 'disabled' : '';
+
+        return `
+          <article class="product-card${soldout}">
+            <a href="product.html?id=${p.id}" class="product-card__img">
+              ${badge}
+              <img src="${p.images?.[0] || 'img/placeholder.jpg'}"
+                   alt="${p.name}" loading="lazy">
+            </a>
+            <div class="product-card__body">
+              <p class="product-card__category">${p.category || ''}</p>
+              <h3 class="product-card__name">
+                <a href="product.html?id=${p.id}">${p.name}</a>
+              </h3>
+              <p class="product-card__price">${formatPrice(p.price)}</p>
+              <button class="btn btn-primary btn-sm btn-full"
+                      ${btnDisabled}
+                      data-add-to-cart="${p.id}">
+                ${p.inStock ? 'Do košíku' : 'Vyprodáno'}
+              </button>
+            </div>
+          </article>`;
+      }).join('');
+
+      initProductCards();
+    }
+
+    function initFilters() {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = btn.dataset.filter;
+
+          const filtered = activeFilter === 'all'
+            ? allProducts
+            : allProducts.filter(p => p.category === activeFilter);
+          renderGrid(filtered);
+        });
+      });
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      showToast('Děkujeme za přihlášení! 🌿', 'success');
+      e.target.reset();
+    }
+
+    initShop();
+  </script>
+</body>
+</html>
