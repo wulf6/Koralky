@@ -266,12 +266,12 @@
             Např.: https://formspree.io/f/xabcdefg
           -->
           <form id="checkout-form"
-                action="https://formspree.io/f/YOUR_FORM_ID"
+                action="https://formspree.io/f/mnjwzlpl"
                 method="POST">
 
             <!-- Skrytá pole — košík data -->
             <input type="hidden" name="_subject" value="Nová objednávka — Korálky & Šperky">
-            <input type="hidden" name="_next" value="thankyou.html">
+            <input type="hidden" name="_next" id="next-url" value="">
             <input type="hidden" name="cart_data" id="cart-data-field">
             <input type="hidden" name="shipping_method" id="shipping-field" value="zasilkovna">
             <input type="hidden" name="payment_method" id="payment-field" value="bank">
@@ -369,8 +369,8 @@
               <div class="terms-check">
                 <input type="checkbox" id="terms" required>
                 <label for="terms">
-                  Souhlasím s <a href="#">obchodními podmínkami</a> a
-                  <a href="#">zásadami ochrany osobních údajů</a>.
+                  Souhlasím s <a href="terms.html">obchodními podmínkami</a> a
+                  <a href="privacy.html">zásadami ochrany osobních údajů</a>.
                 </label>
               </div>
               <button type="submit" class="btn btn-primary btn-lg btn-full" id="submit-btn">
@@ -536,6 +536,10 @@
 
     /* Handle form submit loading state */
     document.addEventListener('DOMContentLoaded', () => {
+      /* Nastav absolutní URL pro Formspree _next redirect */
+      document.getElementById('next-url').value =
+        window.location.origin + window.location.pathname.replace('checkout.html', '') + 'thankyou.html';
+
       initCheckout();
 
       const form = document.getElementById('checkout-form');

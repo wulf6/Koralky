@@ -234,14 +234,32 @@
   <script src="script.js"></script>
   <script>
     function initThankYou() {
-      /* Číslo objednávky — náhodné (v reálu by přišlo ze serveru) */
-      const orderNum = 'KS-' + Date.now().toString().slice(-6);
+      /* Uložit snapshot objednávky PŘED vyprázdněním košíku */
+      const items = Cart.get();
+      const hasItems = items.length > 0;
+
+      /* Pokud košík je prázdný, stránka byla refreshnuta */
+      if (!hasItems) {
+        const notice = document.createElement('p');
+        notice.style.cssText = 'text-align:center;font-size:.82rem;color:var(--text-light);margin-bottom:1rem';
+        notice.textContent = 'Detaily objednávky nejsou dostupné po obnovení stránky — potvrzení přijde e-mailem.';
+        document.querySelector('.thankyou-card').insertBefore(
+          notice,
+          document.querySelector('.next-steps')
+        );
+      }
+
+      /* Číslo objednávky — náhodné, uložit do sessionStorage aby přežilo reload */
+      let orderNum = sessionStorage.getItem('last_order_num');
+      if (!orderNum || hasItems) {
+        orderNum = 'KS-' + Date.now().toString().slice(-6);
+        sessionStorage.setItem('last_order_num', orderNum);
+      }
       document.getElementById('order-num').textContent  = orderNum;
       document.getElementById('order-date').textContent = formatDate();
 
       /* Zobrazit položky z košíku */
-      const items = Cart.get();
-      if (items.length) {
+      if (hasItems) {
         const total = Cart.subtotal();
         document.getElementById('order-total').textContent = formatPrice(total);
 
@@ -257,10 +275,10 @@
           </div>`).join('');
 
         document.getElementById('ordered-items-wrap').style.display = 'block';
-      }
 
-      /* Vyprázdnit košík */
-      Cart.clear();
+        /* Vyprázdnit košík až PO zobrazení */
+        Cart.clear();
+      }
     }
 
     document.addEventListener('DOMContentLoaded', initThankYou);

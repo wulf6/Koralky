@@ -16,6 +16,7 @@ const CONFIG = {
   ],
   FREE_SHIPPING_THRESHOLD: 1200,
 };
+window.CONFIG = CONFIG;
 
 /* ── Produkty ────────────────────────────────────────────── */
 async function loadProducts() {
@@ -109,17 +110,20 @@ const Cart = {
     });
   },
 };
+window.Cart = Cart;
 
 /* ── Formátování ─────────────────────────────────────────── */
 function formatPrice(amount) {
   return `${amount.toLocaleString('cs-CZ')} ${CONFIG.CURRENCY}`;
 }
+window.formatPrice = formatPrice;
 
 function formatDate(date = new Date()) {
   return date.toLocaleDateString('cs-CZ', {
     day: '2-digit', month: 'long', year: 'numeric'
   });
 }
+window.formatDate = formatDate;
 
 /* ── Toast notifikace ────────────────────────────────────── */
 function showToast(message, type = 'success', duration = 3000) {
@@ -141,47 +145,17 @@ function showToast(message, type = 'success', duration = 3000) {
     toast.addEventListener('animationend', () => toast.remove(), { once: true });
   }, duration);
 }
+window.showToast = showToast;
 
 /* ── URL parametry ───────────────────────────────────────── */
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
+window.getParam = getParam;
 
 /* ── Renderovací pomocníci ───────────────────────────────── */
-function renderProductCard(product) {
-  const badge = product.badge
-    ? `<span class="product-card__badge">${product.badge}</span>` : '';
-
-  return `
-    <article class="product-card">
-      <a href="product.html?id=${product.id}" class="product-card__img">
-        ${badge}
-        <img src="${product.images?.[0] || product.image || 'img/placeholder.jpg'}"
-             alt="${product.name}" loading="lazy">
-        <button class="product-card__wishlist" aria-label="Přidat do oblíbených">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.5">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06
-                     a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23
-                     l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </button>
-      </a>
-      <div class="product-card__body">
-        <p class="product-card__category">${product.category || ''}</p>
-        <h3 class="product-card__name">
-          <a href="product.html?id=${product.id}">${product.name}</a>
-        </h3>
-        <p class="product-card__price">${formatPrice(product.price)}</p>
-        <button class="btn btn-primary btn-sm btn-full"
-                onclick="Cart.add(${JSON.stringify(JSON.stringify(product))
-                  .slice(1,-1)
-                  .replace(/\\/g,'\\\\')})">
-          Do košíku
-        </button>
-      </div>
-    </article>`;
-}
+/* renderProductCard odstraněna — stránky renderují karty inline
+   s data-add-to-cart atributem a volají initProductCards() */
 
 /* Bezpečnější verze přidání z karty – používá data atributy */
 function initProductCards() {
@@ -203,17 +177,16 @@ function renderHeader() {
     { href: '#kontakt',      label: 'Kontakt' },
   ];
 
+  const navLinks = nav.map(n => `
+    <a href="${n.href}" class="${n.href === currentPage ? 'active' : ''}">
+      ${n.label}
+    </a>`).join('');
+
   return `
     <header class="site-header">
       <div class="container header-inner">
         <a href="index.html" class="logo">Korálky <span>&amp; Šperky</span></a>
-        <nav class="main-nav">
-          ${nav.map(n => `
-            <a href="${n.href}"
-               class="${n.href === currentPage ? 'active' : ''}">
-              ${n.label}
-            </a>`).join('')}
-        </nav>
+        <nav class="main-nav">${navLinks}</nav>
         <div class="header-actions">
           <a href="cart.html" class="icon-btn" aria-label="Košík">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -224,9 +197,18 @@ function renderHeader() {
             </svg>
             <span class="cart-count"></span>
           </a>
+          <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </div>
-    </header>`;
+    </header>
+    <nav class="mobile-nav" id="mobile-nav">
+      ${navLinks}
+      <div class="divider-line"></div>
+      <a href="terms.html">Obchodní podmínky</a>
+      <a href="privacy.html">Ochrana osobních údajů</a>
+    </nav>`;
 }
 
 function renderFooter() {
@@ -238,6 +220,9 @@ function renderFooter() {
             <a href="index.html" class="logo">Korálky <span>&amp; Šperky</span></a>
             <p>Ručně vyráběné šperky s příběhem. Každý kousek vzniká s láskou
                a péčí z přírodních materiálů.</p>
+            <p style="margin-top:.75rem;font-size:.78rem;color:rgba(138,126,108,.7)">
+              IČO: 000 00 000 &nbsp;|&nbsp; Nejsme plátci DPH.
+            </p>
           </div>
           <div class="footer-col">
             <h4>Navigace</h4>
@@ -250,14 +235,42 @@ function renderFooter() {
             <a href="mailto:info@koralkyasperky.cz">info@koralkyasperky.cz</a>
             <a href="tel:+420123456789">+420 123 456 789</a>
           </div>
+          <div class="footer-col">
+            <h4>Právní info</h4>
+            <a href="terms.html">Obchodní podmínky</a>
+            <a href="privacy.html">Ochrana osobních údajů</a>
+            <a href="terms.html#reklamace">Reklamační řád</a>
+          </div>
         </div>
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} Korálky &amp; Šperky</span>
-          <span>Vyrobeno s ♥</span>
+          <span>Vyrobeno s ♥ v České republice</span>
         </div>
       </div>
     </footer>`;
 }
+
+/* ── Mobile nav toggle ───────────────────────────────────── */
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger');
+  if (!nav || !btn) return;
+  const isOpen = nav.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+/* Zavři mobilní nav při kliknutí na odkaz */
+document.addEventListener('click', (e) => {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger');
+  if (!nav || !nav.classList.contains('open')) return;
+  if (e.target.closest('.mobile-nav a')) {
+    nav.classList.remove('open');
+    btn?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
 
 /* ── Inicializace při načtení stránky ────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -276,13 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductCards();
 });
 
-/* Exporty pro přímé použití v HTML stránkách */
-window.Cart       = Cart;
-window.loadProducts  = loadProducts;
-window.getProduct    = getProduct;
-window.formatPrice   = formatPrice;
-window.formatDate    = formatDate;
-window.showToast     = showToast;
-window.getParam      = getParam;
-window.renderProductCard = renderProductCard;
-window.CONFIG        = CONFIG;
+/* Exporty */
+window.loadProducts    = loadProducts;
+window.getProduct      = getProduct;
+window.toggleMobileNav = toggleMobileNav;

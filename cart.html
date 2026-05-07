@@ -292,7 +292,7 @@
       const subtotal = Cart.subtotal();
       const threshold = CONFIG.FREE_SHIPPING_THRESHOLD;
       const freeShipping = subtotal >= threshold;
-      const shipping = freeShipping ? 0 : 79;
+      const shipping = freeShipping ? 0 : CONFIG.SHIPPING[0].price;
       const total = subtotal + shipping;
       const remaining = threshold - subtotal;
       const pct = Math.min(100, (subtotal / threshold) * 100);
