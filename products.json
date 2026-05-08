@@ -1,98 +1,67 @@
 [
   {
     "id": 1,
-    "name": "Náramek Lesní Víla",
-    "category": "Náramky",
-    "price": 490,
+    "name": "koralky mix",
+    "price": 200,
+    "category": "Náhrdelníky",
     "badge": "Novinka",
-    "description": "Ručně vázaný náramek z přírodních kamenů — labradorit, zelený achát a říční perly. Každý kámen je jedinečný, stejně jako ty. Ideální jako dárek i jako odměna pro sebe.",
-    "material": "Labradorit, zelený achát, říční perly, zlatý uzávěr",
-    "care": "Vyvaruj se kontaktu s vodou a parfémem. Skladuj odděleně.",
+    "description": "",
+    "material": "",
     "images": [
-      "https://images.unsplash.com/photo-1573408301185-9519f94815b1?w=600&q=80",
-      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80"
+      "images/p7120261.jpg"
     ],
-    "inStock": true,
-    "featured": true
+    "inStock": true
   },
   {
     "id": 2,
-    "name": "Náhrdelník Zemský Klid",
+    "name": "Náhrdelníky mix",
+    "price": 349,
     "category": "Náhrdelníky",
-    "price": 890,
     "badge": null,
-    "description": "Jemný pozlacený náhrdelník s přívěskem ze zeleného aventurínu. Kámen klidu, harmonie a prosperity. Délka řetízku 45 cm, nastavitelná.",
-    "material": "Pozlacená ocel (18k), zelený aventurín",
-    "care": "Neskladuj mokrý. Čisti jemným hadříkem.",
+    "description": "",
+    "material": "",
     "images": [
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80",
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80"
+      "images/pc090577.jpg"
     ],
-    "inStock": true,
-    "featured": true
+    "inStock": true
   },
   {
     "id": 3,
-    "name": "Náušnice Kapka Rosy",
-    "category": "Náušnice",
-    "price": 390,
+    "name": "Stylový náhrdelnik",
+    "price": 498,
+    "category": "Náhrdelníky",
     "badge": null,
-    "description": "Lehké náušnice s kapkovitým přívěskem z mléčného opálu. Visí vzdušně a jemně se pohybují. Háček z pozlacené oceli, vhodné i pro citlivou pokožku.",
-    "material": "Pozlacená ocel, syntetický opál",
-    "care": "Neskladuj mokré. Uchovávej v přiloženém sáčku.",
+    "description": "",
+    "material": "",
     "images": [
-      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80",
-      "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=600&q=80"
+      "images/img_20151115_140806.jpg"
     ],
-    "inStock": true,
-    "featured": false
+    "inStock": true
   },
   {
     "id": 4,
-    "name": "Sada Podzimní Les",
-    "category": "Sady",
-    "price": 1190,
-    "badge": "Výhodná sada",
-    "description": "Kompletní sada — náramek, náhrdelník a náušnice ze zemitých kamenů: tygří oko, obsidián a hnědý achát. Krásně zabalená v dárkové krabičce.",
-    "material": "Tygří oko, obsidián, hnědý achát, zlaté komponenty",
-    "care": "Viz péče u jednotlivých kusů.",
+    "name": "Perličkový náramek",
+    "price": 200,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
     "images": [
-      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80",
-      "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80"
+      "images/pb130571.jpg"
     ],
-    "inStock": true,
-    "featured": true
+    "inStock": true
   },
   {
     "id": 5,
-    "name": "Korálkový náramek Slunce",
+    "name": "kov a kámen",
+    "price": 300,
     "category": "Náramky",
-    "price": 320,
-    "badge": null,
-    "description": "Jednoduchý a elegantní náramek z jemných žlutých korálků s pozlaceným středovým korálkem. Skvělý jako každodenní doplněk.",
-    "material": "Skleněné korálky, pozlacená ocel",
-    "care": "Neskladuj mokrý.",
+    "badge": "bestseller",
+    "description": "ruční príce",
+    "material": "",
     "images": [
-      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80",
-      "https://images.unsplash.com/photo-1573408301185-9519f94815b1?w=600&q=80"
+      "images/img_20151115_140132.jpg"
     ],
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 6,
-    "name": "Přívěsek Strom Života",
-    "category": "Náhrdelníky",
-    "price": 590,
-    "badge": "Bestseller",
-    "description": "Oblíbený přívěsek s motivem stromu života. Zaplétaný drát s malými kamínky — symbolizuje propojení kořenů a větví, minulosti a budoucnosti.",
-    "material": "Pozlacený drát, granát, šňůrka",
-    "care": "Chraň před vlhkem a chemikáliemi.",
-    "images": [
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80",
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80"
-    ],
-    "inStock": false,
-    "featured": false
+    "inStock": true
   }
 ]
