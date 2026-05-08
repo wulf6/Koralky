@@ -110,6 +110,14 @@ const Cart = {
     });
   },
 };
+
+/* Oprava: po každém Cart.save() znovu aktualizuj badge s malým zpožděním,
+   aby se zachytilo i po překreslení DOM (renderCart v cart.html) */
+const _origSave = Cart.save.bind(Cart);
+Cart.save = function(items) {
+  _origSave(items);
+  setTimeout(() => Cart.updateBadge(), 50);
+};
 window.Cart = Cart;
 
 /* ── Formátování ─────────────────────────────────────────── */
@@ -188,13 +196,6 @@ function renderHeader() {
         <a href="index.html" class="logo">Korálky <span>&amp; Šperky</span></a>
         <nav class="main-nav">${navLinks}</nav>
         <div class="header-actions">
-          <button class="icon-btn" id="search-toggle" aria-label="Hledat" onclick="toggleSearch()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.5">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-          </button>
           <a href="cart.html" class="icon-btn" aria-label="Košík">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="1.5">
@@ -296,85 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductCards();
 });
 
-
-/* ── Vyhledávání ─────────────────────────────────────────── */
-function toggleSearch() {
-  let overlay = document.getElementById('search-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.id = 'search-overlay';
-    overlay.innerHTML = `
-      <div class="search-modal">
-        <div class="search-modal__header">
-          <input type="text" id="search-input" placeholder="Hledat šperky…" autocomplete="off">
-          <button class="icon-btn" onclick="toggleSearch()" aria-label="Zavřít">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.5">
-              <line x1="18" y1="6" x2="6" y2="18"/>
-              <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
-        </div>
-        <div id="search-results"></div>
-      </div>`;
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) toggleSearch();
-    });
-    document.body.appendChild(overlay);
-
-    const input = document.getElementById('search-input');
-    input.addEventListener('input', debounce(doSearch, 250));
-    setTimeout(() => input.focus(), 50);
-  }
-
-  const isOpen = overlay.classList.toggle('open');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-  if (isOpen) {
-    const input = document.getElementById('search-input');
-    if (input) { input.value = ''; input.focus(); }
-    document.getElementById('search-results').innerHTML = '';
-  }
-}
-
-async function doSearch() {
-  const q = document.getElementById('search-input').value.trim().toLowerCase();
-  const results = document.getElementById('search-results');
-
-  if (q.length < 2) {
-    results.innerHTML = '<p class="search-hint">Zadejte alespoň 2 znaky…</p>';
-    return;
-  }
-
-  const products = await loadProducts();
-  const found = products.filter(p =>
-    p.name.toLowerCase().includes(q) ||
-    (p.category || '').toLowerCase().includes(q) ||
-    (p.description || '').toLowerCase().includes(q)
-  );
-
-  if (!found.length) {
-    results.innerHTML = '<p class="search-hint">Nic nenalezeno. Zkuste jiný výraz.</p>';
-    return;
-  }
-
-  results.innerHTML = found.map(p => `
-    <a href="product.html?id=${p.id}" class="search-result" onclick="toggleSearch()">
-      <img src="${p.images?.[0] || ''}" alt="${p.name}">
-      <div>
-        <span class="search-result__name">${p.name}</span>
-        <span class="search-result__cat">${p.category || ''}</span>
-      </div>
-      <span class="search-result__price">${formatPrice(p.price)}</span>
-    </a>`).join('');
-}
-
-function debounce(fn, delay) {
-  let t;
-  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
-}
-
 /* Exporty */
 window.loadProducts    = loadProducts;
 window.getProduct      = getProduct;
 window.toggleMobileNav = toggleMobileNav;
-window.toggleSearch    = toggleSearch;
