@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "koralky mix",
+    "price": 200,
+    "category": "Náhrdelníky",
+    "badge": "Novinka",
+    "description": "",
+    "material": "",
+    "images": [
+      "images/img_20151115_140922.jpg"
+    ],
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Náhrdelníky mix",
+    "price": 349,
+    "category": "Náhrdelníky",
+    "badge": null,
+    "description": "",
+    "material": "kámen",
+    "images": [
+      "images/img_20151007_232741.jpg"
+    ],
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "name": "Stylový náhrdelnik",
+    "price": 498,
+    "category": "Náhrdelníky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [
+      "images/img_20151115_141420.jpg"
+    ],
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "name": "Perličkový náramek",
+    "price": 200,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [
+      "images/pa250564.jpg"
+    ],
+    "inStock": true
+  },
+  {
+    "id": 5,
+    "name": "kov a kámen",
+    "price": 300,
+    "category": "Náramky",
+    "badge": "bestseller",
+    "description": "ruční príce",
+    "material": "",
+    "images": [
+      "images/pa280168.jpg"
+    ],
+    "inStock": true
+  },
+  {
+    "id": 6,
+    "name": "Nový produkt",
+    "price": 0,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [
+      "images/pa160165.jpg"
+    ],
+    "inStock": true
+  }
+]
