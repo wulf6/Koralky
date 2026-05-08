@@ -111,11 +111,11 @@ const Cart = {
   },
 };
 
-/* Oprava: po každém Cart.save() znovu aktualizuj badge s malým zpožděním,
-   aby se zachytilo i po překreslení DOM (renderCart v cart.html) */
-const _origSave = Cart.save.bind(Cart);
+/* Oprava badge: po kazdem ulozeni kosiku znovu aktualizuj badge s malym
+   zpozdenim, aby se zachytilo i po prekresleni DOM (renderCart v cart.html) */
+const _origCartSave = Cart.save.bind(Cart);
 Cart.save = function(items) {
-  _origSave(items);
+  _origCartSave(items);
   setTimeout(() => Cart.updateBadge(), 50);
 };
 window.Cart = Cart;
