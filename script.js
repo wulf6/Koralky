@@ -36,7 +36,7 @@ async function getProduct(id) {
 }
 
 /* ── Košík ───────────────────────────────────────────────── */
-const Cart = {
+const Cart = window.Cart = {
   /** Vrátí celý košík z localStorage */
   get() {
     try {
@@ -109,14 +109,6 @@ const Cart = {
       el.classList.toggle('visible', count > 0);
     });
   },
-};
-
-/* Oprava badge: po kazdem ulozeni kosiku znovu aktualizuj badge s malym
-   zpozdenim, aby se zachytilo i po prekresleni DOM (renderCart v cart.html) */
-const _origCartSave = Cart.save.bind(Cart);
-Cart.save = function(items) {
-  _origCartSave(items);
-  setTimeout(() => Cart.updateBadge(), 50);
 };
 window.Cart = Cart;
 
