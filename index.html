@@ -6,6 +6,13 @@
   <title>Korálky &amp; Šperky — Ručně vyráběné šperky</title>
   <meta name="description" content="Ručně vyráběné šperky z přírodních kamenů. Náramky, náhrdelníky, náušnice a sady.">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Korálky & Šperky — Ručně vyráběné šperky">
+  <meta property="og:description" content="Ručně vyráběné šperky z přírodních kamenů. Náramky, náhrdelníky, náušnice a sady.">
+  <meta property="og:image"       content="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1200&q=80">
+  <meta property="og:locale"      content="cs_CZ">
+  <meta name="twitter:card"       content="summary_large_image">
   <style>
     /* ── Hero ── */
     .hero {
@@ -147,7 +154,9 @@
     <section class="hero">
       <img class="hero__bg"
            src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1200&q=80"
-           alt="Kolekce šperků">
+           alt="Kolekce šperků"
+           loading="eager"
+           fetchpriority="high">
       <div class="container">
         <div class="hero__content">
           <span class="section-label">Ručně vyráběné</span>
@@ -225,8 +234,15 @@
             <h3>Novinky přímo do schránky</h3>
             <p>Nové kousky, slevy a inspirace — přihlaste se k odběru.</p>
           </div>
-          <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-            <input type="email" placeholder="váš@email.cz" required>
+          <!-- Newsletter odesílá na Formspree — stejné ID jako objednávky -->
+          <!-- Pro oddělený formulář: vytvořte nový endpoint na formspree.io -->
+          <form class="newsletter-form"
+                action="https://formspree.io/f/mnjwzlpl"
+                method="POST"
+                onsubmit="handleNewsletter(event)">
+            <input type="hidden" name="_subject" value="Nový odběratel newsletteru">
+            <input type="hidden" name="type" value="newsletter">
+            <input type="email" name="email" placeholder="váš@email.cz" required>
             <button type="submit" class="btn btn-primary">Přihlásit</button>
           </form>
         </div>
@@ -307,10 +323,31 @@
       });
     }
 
-    function handleNewsletter(e) {
+    async function handleNewsletter(e) {
       e.preventDefault();
-      showToast('Děkujeme za přihlášení! 🌿', 'success');
-      e.target.reset();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Odesílám…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          showToast('Děkujeme za přihlášení! 🌿', 'success');
+          form.reset();
+        } else {
+          showToast('Něco se pokazilo, zkuste to znovu.', 'error');
+        }
+      } catch {
+        showToast('Chyba připojení, zkuste to znovu.', 'error');
+      } finally {
+        btn.textContent = 'Přihlásit';
+        btn.disabled = false;
+      }
     }
 
     document.addEventListener('DOMContentLoaded', initShop);
