@@ -21,7 +21,10 @@ window.CONFIG = CONFIG;
 /* ── Produkty ────────────────────────────────────────────── */
 async function loadProducts() {
   try {
-    const res = await fetch('products.json');
+    /* Cache-busting: přidá timestamp aby prohlížeč vždy načetl čerstvá data */
+    const res = await fetch('products.json?v=' + Date.now(), {
+      cache: 'no-store',
+    });
     if (!res.ok) throw new Error('Nelze načíst produkty');
     return await res.json();
   } catch (err) {
@@ -152,10 +155,6 @@ function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 window.getParam = getParam;
-
-/* ── Renderovací pomocníci ───────────────────────────────── */
-/* renderProductCard odstraněna — stránky renderují karty inline
-   s data-add-to-cart atributem a volají initProductCards() */
 
 /* Bezpečnější verze přidání z karty – používá data atributy */
 function initProductCards() {
