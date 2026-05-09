@@ -3,7 +3,7 @@
     "id": 1,
     "name": "koralky mix",
     "price": 200,
-    "category": "NÃ¡hrdelnÃ­ky",
+    "category": "Náhrdelníky",
     "badge": "Novinka",
     "description": "",
     "material": "",
@@ -14,12 +14,12 @@
   },
   {
     "id": 2,
-    "name": "NÃ¡hrdelnÃ­ky mix",
+    "name": "Náhrdelníky mix",
     "price": 349,
-    "category": "NÃ¡hrdelnÃ­ky",
+    "category": "Náhrdelníky",
     "badge": null,
     "description": "",
-    "material": "kÃ¡men",
+    "material": "kámen",
     "images": [
       "images/img_20151007_232741.jpg"
     ],
@@ -27,9 +27,9 @@
   },
   {
     "id": 3,
-    "name": "StylovÃ½ nÃ¡hrdelnik",
+    "name": "Stylový náhrdelnik",
     "price": 498,
-    "category": "NÃ¡hrdelnÃ­ky",
+    "category": "Náhrdelníky",
     "badge": null,
     "description": "",
     "material": "",
@@ -40,11 +40,11 @@
   },
   {
     "id": 5,
-    "name": "kov a kÃ¡men",
+    "name": "kov a kámen",
     "price": 300,
-    "category": "NÃ¡ramky",
+    "category": "Náramky",
     "badge": "bestseller",
-    "description": "ruÄnÃ­ prÃ­ce",
+    "description": "ruční príce",
     "material": "",
     "images": [
       "images/pa280168.jpg"
@@ -53,9 +53,9 @@
   },
   {
     "id": 6,
-    "name": "NovÃ½ produkt",
+    "name": "Nový produkt",
     "price": 0,
-    "category": "NÃ¡ramky",
+    "category": "Náramky",
     "badge": null,
     "description": "",
     "material": "",
