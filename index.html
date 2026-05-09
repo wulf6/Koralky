@@ -107,6 +107,22 @@
     }
     .product-card--soldout .btn { opacity: .5; cursor: not-allowed; pointer-events: none; }
 
+    /* ── Placeholder pro produkty bez fotky ── */
+    .product-card__img img[src=""] ,
+    .product-card__img img:not([src]) {
+      visibility: hidden;
+    }
+    .product-card__img--noimg {
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      color: var(--text-light);
+      font-size: 2rem;
+      opacity: .4;
+    }
+
     /* ── Newsletter strip ── */
     .newsletter {
       background: var(--text);
@@ -234,8 +250,6 @@
             <h3>Novinky přímo do schránky</h3>
             <p>Nové kousky, slevy a inspirace — přihlaste se k odběru.</p>
           </div>
-          <!-- Newsletter odesílá na Formspree — stejné ID jako objednávky -->
-          <!-- Pro oddělený formulář: vytvořte nový endpoint na formspree.io -->
           <form class="newsletter-form"
                 action="https://formspree.io/f/mnjwzlpl"
                 method="POST"
@@ -282,13 +296,18 @@
         const badge = p.badge
           ? `<span class="product-card__badge">${p.badge}</span>` : '';
         const btnDisabled = !p.inStock ? 'disabled' : '';
+        /* Obrázek: pokud produkt nemá fotku, zobraz CSS placeholder místo broken image */
+        const imgSrc = p.images?.[0] || p.image || '';
+        const imgHtml = imgSrc
+          ? `<img src="${imgSrc}" alt="${p.name}" loading="lazy"
+                  onerror="this.style.visibility='hidden'">`
+          : `<div class="product-card__img--noimg">◻</div>`;
 
         return `
           <article class="product-card${soldout}">
             <a href="product.html?id=${p.id}" class="product-card__img">
               ${badge}
-              <img src="${p.images?.[0] || 'img/placeholder.jpg'}"
-                   alt="${p.name}" loading="lazy">
+              ${imgHtml}
             </a>
             <div class="product-card__body">
               <p class="product-card__category">${p.category || ''}</p>
