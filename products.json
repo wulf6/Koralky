@@ -37,5 +37,31 @@
       "images/pa280168.jpg"
     ],
     "inStock": true
+  },
+  {
+    "id": 6,
+    "name": "Nový produkt",
+    "price": 0,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [
+      "images/sn-mek-obrazovky-2026-03-29-220802.png"
+    ],
+    "inStock": true
+  },
+  {
+    "id": 7,
+    "name": "Nový produkt",
+    "price": 0,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [
+      "images/sn-mek-obrazovky-2026-04-09-140739.png"
+    ],
+    "inStock": true
   }
 ]
