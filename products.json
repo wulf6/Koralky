@@ -3,7 +3,7 @@
     "id": 1,
     "name": "koralky mix",
     "price": 200,
-    "category": "Náhrdelníky",
+    "category": "NÃ¡hrdelnÃ­ky",
     "badge": "Novinka",
     "description": "",
     "material": "",
@@ -14,12 +14,12 @@
   },
   {
     "id": 2,
-    "name": "Náhrdelníky mix",
+    "name": "NÃ¡hrdelnÃ­ky mix",
     "price": 349,
-    "category": "Náhrdelníky",
+    "category": "NÃ¡hrdelnÃ­ky",
     "badge": null,
     "description": "",
-    "material": "kámen",
+    "material": "kÃ¡men",
     "images": [
       "images/img_20151007_232741.jpg"
     ],
@@ -27,9 +27,9 @@
   },
   {
     "id": 3,
-    "name": "Stylový náhrdelnik",
+    "name": "StylovÃ½ nÃ¡hrdelnik",
     "price": 498,
-    "category": "Náhrdelníky",
+    "category": "NÃ¡hrdelnÃ­ky",
     "badge": null,
     "description": "",
     "material": "",
@@ -39,25 +39,12 @@
     "inStock": true
   },
   {
-    "id": 4,
-    "name": "Perličkový náramek",
-    "price": 200,
-    "category": "Náramky",
-    "badge": null,
-    "description": "",
-    "material": "",
-    "images": [
-      "images/pa250564.jpg"
-    ],
-    "inStock": true
-  },
-  {
     "id": 5,
-    "name": "kov a kámen",
+    "name": "kov a kÃ¡men",
     "price": 300,
-    "category": "Náramky",
+    "category": "NÃ¡ramky",
     "badge": "bestseller",
-    "description": "ruční príce",
+    "description": "ruÄnÃ­ prÃ­ce",
     "material": "",
     "images": [
       "images/pa280168.jpg"
@@ -66,15 +53,26 @@
   },
   {
     "id": 6,
-    "name": "Nový produkt",
+    "name": "NovÃ½ produkt",
     "price": 0,
-    "category": "Náramky",
+    "category": "NÃ¡ramky",
     "badge": null,
     "description": "",
     "material": "",
     "images": [
       "images/pa160165.jpg"
     ],
+    "inStock": true
+  },
+  {
+    "id": 7,
+    "name": "Nový produkt",
+    "price": 0,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [],
     "inStock": true
   }
 ]
