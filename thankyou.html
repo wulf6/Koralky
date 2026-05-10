@@ -1,294 +1,337 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Objednávka přijata — Korálky &amp; Šperky</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Děkujeme — Korálky & Šperky">
-  <meta property="og:description" content="Vaše objednávka byla přijata.">
-  <meta property="og:image"       content="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1200&q=80">
-  <meta property="og:locale"      content="cs_CZ">
-  <meta name="twitter:card"       content="summary_large_image">
-  <style>
-    .thankyou-wrap {
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objednávka přijata — Korálky &amp; Šperky</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Děkujeme — Korálky & Šperky">
+<meta property="og:description" content="Vaše objednávka byla přijata.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1200&q=80">
+<meta property="og:locale" content="cs_CZ">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+.thankyou-wrap {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+}
+.thankyou-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem;
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  animation: fadeUp .6s ease forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+.checkmark {
+  width: 80px; height: 80px;
+  background: rgba(122,140,110,.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2.5rem;
+  animation: pop .5s .3s ease both;
+}
+@keyframes pop {
+  0%   { transform: scale(.5); opacity: 0; }
+  80%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.thankyou-card h1 { font-size: 2rem; margin-bottom: .75rem; color: var(--text); }
+.thankyou-card > p { color: var(--text-mid); line-height: 1.8; margin-bottom: 2rem; }
 
-    .thankyou-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 3.5rem;
-      box-shadow: var(--shadow-lg);
-      max-width: 560px;
-      width: 100%;
-      text-align: center;
-      animation: fadeUp .6s ease forwards;
-    }
+/* ── Order details box ── */
+.order-box {
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.order-box h4 {
+  font-family: var(--font-sans);
+  font-size: .7rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+}
+.order-box__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: var(--text-mid);
+  padding: .4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.order-box__row:last-child { border-bottom: none; }
+.order-box__row strong { color: var(--text); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: none; }
-    }
+/* ── Bank transfer box ── */
+.bank-box {
+  background: #fff8e8;
+  border: 1px solid #f0c040;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.bank-box__title {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .82rem;
+  font-weight: 600;
+  color: #7a5c00;
+  margin-bottom: 1rem;
+}
+.bank-box__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .85rem;
+  color: var(--text-mid);
+  padding: .4rem 0;
+  border-bottom: 1px solid rgba(240,192,64,.25);
+  gap: 1rem;
+}
+.bank-box__row:last-child { border-bottom: none; }
+.bank-box__label { color: #7a5c00; font-size: .75rem; flex-shrink: 0; }
+.bank-box__value { font-weight: 600; color: var(--text); font-family: var(--font-mono, monospace); text-align: right; }
+.bank-box__note {
+  font-size: .75rem;
+  color: #7a5c00;
+  margin-top: .75rem;
+  line-height: 1.6;
+}
 
-    .checkmark {
-      width: 80px; height: 80px;
-      background: rgba(122,140,110,.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 2.5rem;
-      animation: pop .5s .3s ease both;
-    }
+/* ── Items list ── */
+.ordered-items { text-align: left; margin-bottom: 1.5rem; }
+.ordered-items h4 {
+  font-family: var(--font-sans);
+  font-size: .7rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+}
+.ordered-item {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.ordered-item:last-child { border-bottom: none; }
+.ordered-item__img {
+  width: 44px; height: 44px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--sand);
+  flex-shrink: 0;
+}
+.ordered-item__img img { width: 100%; height: 100%; object-fit: cover; }
+.ordered-item__name { flex: 1; font-size: .85rem; color: var(--text); }
+.ordered-item__qty { font-size: .78rem; color: var(--text-light); }
+.ordered-item__price { font-size: .85rem; font-weight: 500; color: var(--gold-dark); }
 
-    @keyframes pop {
-      0%   { transform: scale(.5); opacity: 0; }
-      80%  { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
-    }
+/* ── Next steps ── */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+.next-step {
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.next-step__icon { font-size: 1.3rem; margin-bottom: .4rem; }
+.next-step__title { font-size: .78rem; font-weight: 500; color: var(--text); margin-bottom: .2rem; }
+.next-step__desc  { font-size: .72rem; color: var(--text-light); }
 
-    .thankyou-card h1 {
-      font-size: 2rem;
-      margin-bottom: .75rem;
-      color: var(--text);
-    }
+.thankyou-actions { display: flex; flex-direction: column; gap: .75rem; }
 
-    .thankyou-card > p {
-      color: var(--text-mid);
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-
-    /* ── Order details box ── */
-    .order-box {
-      background: var(--cream);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: left;
-      margin-bottom: 2rem;
-    }
-    .order-box h4 {
-      font-family: var(--font-sans);
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .order-box__row {
-      display: flex;
-      justify-content: space-between;
-      font-size: .85rem;
-      color: var(--text-mid);
-      padding: .4rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .order-box__row:last-child { border-bottom: none; }
-    .order-box__row strong { color: var(--text); }
-
-    /* ── Items list ── */
-    .ordered-items {
-      text-align: left;
-      margin-bottom: 2rem;
-    }
-    .ordered-items h4 {
-      font-family: var(--font-sans);
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .ordered-item {
-      display: flex;
-      align-items: center;
-      gap: .875rem;
-      padding: .6rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .ordered-item:last-child { border-bottom: none; }
-    .ordered-item__img {
-      width: 44px; height: 44px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--sand);
-      flex-shrink: 0;
-    }
-    .ordered-item__img img { width: 100%; height: 100%; object-fit: cover; }
-    .ordered-item__name { flex: 1; font-size: .85rem; color: var(--text); }
-    .ordered-item__qty  { font-size: .78rem; color: var(--text-light); }
-    .ordered-item__price { font-size: .85rem; font-weight: 500; color: var(--gold-dark); }
-
-    /* ── Actions ── */
-    .thankyou-actions {
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-    }
-
-    /* ── What's next ── */
-    .next-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin: 1.5rem 0;
-      text-align: left;
-    }
-    .next-step {
-      background: var(--cream);
-      border-radius: var(--radius);
-      padding: 1rem;
-    }
-    .next-step__icon { font-size: 1.3rem; margin-bottom: .4rem; }
-    .next-step__title {
-      font-size: .78rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: .2rem;
-    }
-    .next-step__desc { font-size: .72rem; color: var(--text-light); }
-
-    @media (max-width: 600px) {
-      .thankyou-card { padding: 2rem 1.25rem; }
-      .next-steps { grid-template-columns: 1fr; }
-    }
-  </style>
+@media (max-width: 600px) {
+  .thankyou-card { padding: 2rem 1.25rem; }
+  .next-steps { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
+<div id="site-header"></div>
+<main>
+  <div class="thankyou-wrap">
+    <div class="container" style="display:flex;justify-content:center">
+      <div class="thankyou-card">
+        <div class="checkmark">✓</div>
+        <h1>Děkujeme!<br><em>Objednávka přijata</em></h1>
+        <p>
+          Vaši objednávku jsme přijali a brzy se ozve e-mail s potvrzením.
+          Šperky odesíláme do 2 pracovních dnů s láskou zabalené. 🌿
+        </p>
 
-  <div id="site-header"></div>
+        <!-- Detaily objednávky -->
+        <div class="order-box">
+          <h4>Detaily objednávky</h4>
+          <div class="order-box__row">
+            <span>Číslo objednávky</span>
+            <strong id="order-num">—</strong>
+          </div>
+          <div class="order-box__row">
+            <span>Datum</span>
+            <strong id="order-date">—</strong>
+          </div>
+          <div class="order-box__row">
+            <span>Celková cena</span>
+            <strong id="order-total">—</strong>
+          </div>
+          <div class="order-box__row">
+            <span>Způsob platby</span>
+            <strong id="order-payment">—</strong>
+          </div>
+        </div>
 
-  <main>
-    <div class="thankyou-wrap">
-      <div class="container" style="display:flex;justify-content:center">
-        <div class="thankyou-card">
-          <div class="checkmark">✓</div>
-
-          <h1>Děkujeme!<br><em>Objednávka přijata</em></h1>
-          <p>
-            Vaši objednávku jsme přijali a brzy se ozve e-mail s potvrzením.
-            Šperky odesíláme do 2 pracovních dnů s láskou zabalené. 🌿
+        <!-- Platební instrukce — bankovní převod -->
+        <div class="bank-box" id="bank-instructions" style="display:none">
+          <div class="bank-box__title">🏦 Pokyny k platbě převodem</div>
+          <div class="bank-box__row">
+            <span class="bank-box__label">Číslo účtu</span>
+            <span class="bank-box__value">CZ00 0000 0000 0000 0000 0000</span>
+          </div>
+          <div class="bank-box__row">
+            <span class="bank-box__label">Částka</span>
+            <span class="bank-box__value" id="bank-amount">—</span>
+          </div>
+          <div class="bank-box__row">
+            <span class="bank-box__label">Variabilní symbol</span>
+            <span class="bank-box__value" id="bank-vs">—</span>
+          </div>
+          <div class="bank-box__row">
+            <span class="bank-box__label">Banka</span>
+            <span class="bank-box__value">— (doplň název banky)</span>
+          </div>
+          <p class="bank-box__note">
+            ⏳ Objednávku zpracujeme ihned po přijetí platby (zpravidla do 1–2 pracovních dnů).
+            Jako zprávu pro příjemce uveďte prosím číslo objednávky <strong id="bank-note-num"></strong>.
           </p>
+        </div>
 
-          <!-- Order box -->
-          <div class="order-box">
-            <h4>Detaily objednávky</h4>
-            <div class="order-box__row">
-              <span>Číslo objednávky</span>
-              <strong id="order-num">—</strong>
-            </div>
-            <div class="order-box__row">
-              <span>Datum</span>
-              <strong id="order-date">—</strong>
-            </div>
-            <div class="order-box__row">
-              <span>Celková cena</span>
-              <strong id="order-total">—</strong>
-            </div>
-          </div>
+        <!-- Objednané produkty -->
+        <div class="ordered-items" id="ordered-items-wrap" style="display:none">
+          <h4>Objednané položky</h4>
+          <div id="ordered-items-list"></div>
+        </div>
 
-          <!-- Objednané produkty -->
-          <div class="ordered-items" id="ordered-items-wrap" style="display:none">
-            <h4>Objednané položky</h4>
-            <div id="ordered-items-list"></div>
+        <!-- Co bude dál -->
+        <div class="next-steps">
+          <div class="next-step">
+            <div class="next-step__icon">📧</div>
+            <div class="next-step__title">Potvrzení</div>
+            <div class="next-step__desc">E-mail dorazí do pár minut</div>
           </div>
+          <div class="next-step">
+            <div class="next-step__icon">🎁</div>
+            <div class="next-step__title">Balení</div>
+            <div class="next-step__desc">Zabalíme do 2 pracovních dnů</div>
+          </div>
+          <div class="next-step">
+            <div class="next-step__icon">🚚</div>
+            <div class="next-step__title">Doručení</div>
+            <div class="next-step__desc">Zásilka dorazí do 2–4 dnů</div>
+          </div>
+        </div>
 
-          <!-- Co bude dál -->
-          <div class="next-steps">
-            <div class="next-step">
-              <div class="next-step__icon">📧</div>
-              <div class="next-step__title">Potvrzení</div>
-              <div class="next-step__desc">E-mail dorazí do pár minut</div>
-            </div>
-            <div class="next-step">
-              <div class="next-step__icon">🎁</div>
-              <div class="next-step__title">Balení</div>
-              <div class="next-step__desc">Zabalíme do 2 pracovních dnů</div>
-            </div>
-            <div class="next-step">
-              <div class="next-step__icon">🚚</div>
-              <div class="next-step__title">Doručení</div>
-              <div class="next-step__desc">Zásilka dorazí do 2–4 dnů</div>
-            </div>
-          </div>
-
-          <!-- Akce -->
-          <div class="thankyou-actions">
-            <a href="index.html" class="btn btn-primary btn-lg">
-              Pokračovat v nákupu
-            </a>
-            <a href="index.html" class="btn btn-outline btn-lg">
-              Zpět na hlavní stránku
-            </a>
-          </div>
+        <!-- Akce -->
+        <div class="thankyou-actions">
+          <a href="index.html" class="btn btn-primary btn-lg">Pokračovat v nákupu</a>
+          <a href="index.html" class="btn btn-outline btn-lg">Zpět na hlavní stránku</a>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="script.js"></script>
+<script>
+function initThankYou() {
+  const items = Cart.get();
+  const hasItems = items.length > 0;
 
-  <div id="site-footer"></div>
+  if (!hasItems) {
+    const notice = document.createElement('p');
+    notice.style.cssText = 'text-align:center;font-size:.82rem;color:var(--text-light);margin-bottom:1rem';
+    notice.textContent = 'Detaily objednávky nejsou dostupné po obnovení stránky — potvrzení přijde e-mailem.';
+    document.querySelector('.thankyou-card').insertBefore(notice, document.querySelector('.next-steps'));
+  }
 
-  <script src="script.js"></script>
-  <script>
-    function initThankYou() {
-      /* Uložit snapshot objednávky PŘED vyprázdněním košíku */
-      const items = Cart.get();
-      const hasItems = items.length > 0;
+  // Číslo objednávky
+  let orderNum = sessionStorage.getItem('last_order_num');
+  if (!orderNum || hasItems) {
+    orderNum = 'KS-' + Date.now().toString().slice(-6);
+    sessionStorage.setItem('last_order_num', orderNum);
+  }
 
-      /* Pokud košík je prázdný, stránka byla refreshnuta */
-      if (!hasItems) {
-        const notice = document.createElement('p');
-        notice.style.cssText = 'text-align:center;font-size:.82rem;color:var(--text-light);margin-bottom:1rem';
-        notice.textContent = 'Detaily objednávky nejsou dostupné po obnovení stránky — potvrzení přijde e-mailem.';
-        document.querySelector('.thankyou-card').insertBefore(
-          notice,
-          document.querySelector('.next-steps')
-        );
-      }
+  document.getElementById('order-num').textContent = orderNum;
+  document.getElementById('order-date').textContent = formatDate();
 
-      /* Číslo objednávky — náhodné, uložit do sessionStorage aby přežilo reload */
-      let orderNum = sessionStorage.getItem('last_order_num');
-      if (!orderNum || hasItems) {
-        orderNum = 'KS-' + Date.now().toString().slice(-6);
-        sessionStorage.setItem('last_order_num', orderNum);
-      }
-      document.getElementById('order-num').textContent  = orderNum;
-      document.getElementById('order-date').textContent = formatDate();
+  // Způsob platby z URL parametru (Formspree _next předá query string)
+  const params = new URLSearchParams(window.location.search);
+  const paymentMethod = params.get('payment') || sessionStorage.getItem('last_payment') || 'bank';
+  const isCOD = paymentMethod === 'cod';
 
-      /* Zobrazit položky z košíku */
-      if (hasItems) {
-        const total = Cart.subtotal();
-        document.getElementById('order-total').textContent = formatPrice(total);
+  document.getElementById('order-payment').textContent = isCOD ? 'Dobírka' : 'Bankovní převod';
 
-        const list = document.getElementById('ordered-items-list');
-        list.innerHTML = items.map(item => `
-          <div class="ordered-item">
-            <div class="ordered-item__img">
-              <img src="${item.image || ''}" alt="${item.name}">
-            </div>
-            <span class="ordered-item__name">${item.name}</span>
-            <span class="ordered-item__qty">× ${item.qty}</span>
-            <span class="ordered-item__price">${formatPrice(item.price * item.qty)}</span>
-          </div>`).join('');
+  if (hasItems) {
+    const subtotal = Cart.subtotal();
+    // Shipping z sessionStorage pokud bylo uloženo
+    const shippingCost = parseInt(sessionStorage.getItem('last_shipping_cost') || '0');
+    const codFee = isCOD ? 39 : 0;
+    const total = subtotal + shippingCost + codFee;
+    const totalFormatted = formatPrice(total);
 
-        document.getElementById('ordered-items-wrap').style.display = 'block';
+    document.getElementById('order-total').textContent = totalFormatted;
 
-        /* Vyprázdnit košík až PO zobrazení */
-        Cart.clear();
-      }
+    // Bankovní instrukce — zobrazit jen při převodu
+    if (!isCOD) {
+      document.getElementById('bank-instructions').style.display = 'block';
+      document.getElementById('bank-amount').textContent = totalFormatted;
+      document.getElementById('bank-vs').textContent = orderNum.replace('KS-', '');
+      document.getElementById('bank-note-num').textContent = orderNum;
     }
 
-    document.addEventListener('DOMContentLoaded', initThankYou);
-  </script>
+    // Seznam produktů
+    const list = document.getElementById('ordered-items-list');
+    list.innerHTML = items.map(item => `
+      <div class="ordered-item">
+        <div class="ordered-item__img">
+          <img src="${item.image || ''}" alt="${item.name}">
+        </div>
+        <span class="ordered-item__name">${item.name}</span>
+        <span class="ordered-item__qty">× ${item.qty}</span>
+        <span class="ordered-item__price">${formatPrice(item.price * item.qty)}</span>
+      </div>`).join('');
+    document.getElementById('ordered-items-wrap').style.display = 'block';
+
+    // Vyprázdnit košík
+    Cart.clear();
+    sessionStorage.removeItem('last_shipping_cost');
+    sessionStorage.removeItem('last_payment');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initThankYou);
+</script>
 </body>
 </html>

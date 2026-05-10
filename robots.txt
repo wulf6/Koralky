@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Blokovat admin panel a interní soubory
+Disallow: /admin.html
+Disallow: /products.json
+Disallow: /settings.json
+
+# Sitemap
+Sitemap: https://wulf6.github.io/Koralky/sitemap.xml
