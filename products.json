@@ -63,5 +63,18 @@
       "images/sn-mek-obrazovky-2026-03-31-163652.png"
     ],
     "inStock": true
+  },
+  {
+    "id": 9,
+    "name": "Nový produkt",
+    "price": 0,
+    "category": "Náramky",
+    "badge": null,
+    "description": "",
+    "material": "",
+    "images": [
+      "images/sn-mek-obrazovky-2026-04-29-071632.png"
+    ],
+    "inStock": true
   }
 ]
