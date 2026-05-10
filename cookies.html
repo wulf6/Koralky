@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zásady cookies — Korálky &amp; Šperky</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="Informace o souborech cookie používaných na webu Korálky & Šperky.">
+  <style>
+    .legal-wrap { max-width: 780px; margin: 0 auto; padding: 3rem 0 6rem; }
+    .legal-wrap h1 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: .5rem; }
+    .legal-meta { color: var(--text-light); font-size: .82rem; margin-bottom: 2.5rem; }
+    .legal-wrap h2 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem; margin: 2.5rem 0 .75rem;
+      padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text);
+    }
+    .legal-wrap h2:first-of-type { border-top: none; margin-top: 1rem; }
+    .legal-wrap p, .legal-wrap li { font-size: .92rem; color: var(--text-mid); line-height: 1.8; }
+    .legal-wrap ul { padding-left: 1.4rem; margin-bottom: .75rem; }
+    .legal-back { display: inline-flex; align-items: center; gap: .5rem; color: var(--gold); font-size: .82rem; margin-bottom: 2rem; }
+
+    /* Cookie tabulka */
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: .84rem;
+    }
+    .cookie-table th {
+      text-align: left;
+      padding: .6rem .875rem;
+      background: var(--cream);
+      border-bottom: 2px solid var(--border);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .cookie-table td {
+      padding: .6rem .875rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-mid);
+      vertical-align: top;
+    }
+    .cookie-table tr:last-child td { border-bottom: none; }
+    .cookie-table td:first-child { font-family: monospace; font-size: .8rem; color: var(--text); }
+
+    .badge-required {
+      display: inline-block;
+      background: rgba(122,140,110,.12);
+      color: #5a7a50;
+      font-size: .68rem;
+      font-weight: 500;
+      padding: .2rem .5rem;
+      border-radius: 2rem;
+    }
+    .badge-optional {
+      display: inline-block;
+      background: rgba(184,151,90,.12);
+      color: var(--gold-dark);
+      font-size: .68rem;
+      font-weight: 500;
+      padding: .2rem .5rem;
+      border-radius: 2rem;
+    }
+
+    /* Nastavení souhlasu */
+    .consent-panel {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .consent-panel h3 { font-size: .9rem; margin-bottom: 1rem; }
+    .consent-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .consent-row:last-child { border-bottom: none; }
+    .consent-row__info { flex: 1; }
+    .consent-row__label { font-size: .85rem; font-weight: 500; color: var(--text); }
+    .consent-row__desc { font-size: .75rem; color: var(--text-light); margin-top: .15rem; }
+
+    /* Toggle switch */
+    .toggle {
+      position: relative;
+      width: 44px; height: 24px;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: .3s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      left: 3px; bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: .3s;
+    }
+    .toggle input:checked + .toggle-slider { background: var(--gold); }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .toggle input:disabled + .toggle-slider { opacity: .6; cursor: not-allowed; }
+
+    .consent-actions { display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main style="padding: 0 1.5rem">
+    <div class="legal-wrap">
+
+      <a href="index.html" class="legal-back">← Zpět na úvodní stránku</a>
+
+      <h1>Zásady cookies</h1>
+      <p class="legal-meta">Platné od 1. 1. 2024 &nbsp;·&nbsp; Korálky &amp; Šperky</p>
+
+      <h2>1. Co jsou soubory cookie</h2>
+      <p>
+        Soubory cookie jsou malé textové soubory ukládané do vašeho prohlížeče při návštěvě webu.
+        Slouží k zapamatování vašich preferencí, obsahu košíku nebo k analýze návštěvnosti.
+        Tento web využívá také technologii <strong>localStorage</strong> a <strong>sessionStorage</strong>,
+        které fungují podobně jako cookies, ale ukládají data jen v rámci vašeho prohlížeče —
+        nikam je neodesílají.
+      </p>
+
+      <h2>2. Jaké cookies používáme</h2>
+
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Název</th>
+            <th>Typ</th>
+            <th>Účel</th>
+            <th>Platnost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>cart</td>
+            <td><span class="badge-required">Nezbytné</span></td>
+            <td>Ukládá obsah nákupního košíku (localStorage)</td>
+            <td>Do smazání prohlížeče</td>
+          </tr>
+          <tr>
+            <td>cookie_consent</td>
+            <td><span class="badge-required">Nezbytné</span></td>
+            <td>Ukládá vaši volbu souhlasu s cookies (localStorage)</td>
+            <td>12 měsíců</td>
+          </tr>
+          <tr>
+            <td>last_order_num</td>
+            <td><span class="badge-required">Nezbytné</span></td>
+            <td>Číslo poslední objednávky pro stránku poděkování (sessionStorage)</td>
+            <td>Do zavření záložky</td>
+          </tr>
+          <tr>
+            <td>last_payment</td>
+            <td><span class="badge-required">Nezbytné</span></td>
+            <td>Způsob platby pro stránku poděkování (sessionStorage)</td>
+            <td>Do zavření záložky</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Analytické ani marketingové cookies nepoužíváme.</strong>
+        Nesledujeme vás přes reklamní sítě ani nesdílíme vaše data s třetími stranami
+        za účelem cíleného marketingu.
+      </p>
+
+      <h2>3. Nastavení vašeho souhlasu</h2>
+      <p>
+        Nezbytné cookies a localStorage nelze vypnout — bez nich by web nefungoval správně
+        (košík, potvrzení objednávky). Analytické a marketingové nástroje nepoužíváme,
+        takže žádné další souhlasy nejsou potřeba.
+      </p>
+
+      <div class="consent-panel">
+        <h3>Aktuální nastavení cookies</h3>
+        <div class="consent-row">
+          <div class="consent-row__info">
+            <div class="consent-row__label">Nezbytné cookies</div>
+            <div class="consent-row__desc">Košík, souhlas, objednávka — nutné pro funkci webu</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked disabled>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="consent-row">
+          <div class="consent-row__info">
+            <div class="consent-row__label">Analytické cookies</div>
+            <div class="consent-row__desc">Sledování návštěvnosti — tento web je nepoužívá</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" disabled>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="consent-row">
+          <div class="consent-row__info">
+            <div class="consent-row__label">Marketingové cookies</div>
+            <div class="consent-row__desc">Cílená reklama — tento web je nepoužívá</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" disabled>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="consent-actions">
+          <button class="btn btn-primary" onclick="resetCookieConsent()">Zobrazit znovu cookie lištu</button>
+          <button class="btn btn-outline" onclick="clearAllStorage()">Smazat všechna data z prohlížeče</button>
+        </div>
+      </div>
+
+      <h2>4. Jak cookies spravovat nebo smazat</h2>
+      <p>
+        Soubory cookie a data localStorage můžete smazat nebo blokovat přímo v nastavení
+        vašeho prohlížeče:
+      </p>
+      <ul>
+        <li><strong>Chrome:</strong> Nastavení → Soukromí a zabezpečení → Soubory cookie</li>
+        <li><strong>Firefox:</strong> Nastavení → Soukromí a zabezpečení → Cookies a data stránek</li>
+        <li><strong>Safari:</strong> Předvolby → Soukromí → Spravovat data webů</li>
+        <li><strong>Edge:</strong> Nastavení → Soukromí, hledání a služby → Cookies</li>
+      </ul>
+      <p>
+        Upozorňujeme, že smazáním dat ztratíte obsah košíku a bude vám opět zobrazena
+        cookie lišta.
+      </p>
+
+      <h2>5. Změny zásad</h2>
+      <p>
+        Tyto zásady cookies můžeme průběžně aktualizovat, například při přidání nových funkcí webu.
+        Aktuální verze je vždy dostupná na této stránce. Při podstatné změně vás upozorní
+        nová cookie lišta.
+      </p>
+
+      <h2>6. Kontakt</h2>
+      <p>
+        Otázky ohledně cookies zasílejte na <strong>info@koralkyasperky.cz</strong>.
+      </p>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="script.js"></script>
+  <script>
+    function resetCookieConsent() {
+      localStorage.removeItem('cookie_consent');
+      location.reload();
+    }
+    function clearAllStorage() {
+      if (confirm('Opravdu smazat všechna data? Košík bude vyprázdněn.')) {
+        localStorage.clear();
+        sessionStorage.clear();
+        alert('Data smazána. Stránka se znovu načte.');
+        location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>
