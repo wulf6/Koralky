@@ -3,34 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obchodní podmínky — Korálky &amp; Šperky</title>
+  <title>Obchodní podmínky — Korálky & Šperky</title>
+  <meta name="description" content="Obchodní podmínky eshopu Korálky & Šperky.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <style>
-    .legal-wrap {
+    .legal-hero {
+      background: var(--text);
+      color: var(--cream);
+      padding: 3.5rem 0 2.5rem;
+    }
+    .legal-hero h1 { font-family: var(--font-serif); color: var(--sand); margin-bottom: .5rem; }
+    .legal-hero p  { color: rgba(232,220,200,.55); font-size: .85rem; font-family: var(--font-mono, monospace); }
+
+    .legal-body {
       max-width: 780px;
       margin: 0 auto;
-      padding: 3rem 0 6rem;
+      padding: 3rem 1.5rem 5rem;
     }
-    .legal-wrap h2 {
-      font-size: 1.4rem;
+    .legal-body h2 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
       margin: 2.5rem 0 .75rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
+      color: var(--text);
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border, #e2d9cc);
+    }
+    .legal-body h2:first-child { margin-top: 0; }
+    .legal-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 .5rem;
       color: var(--text);
     }
-    .legal-wrap h2:first-of-type { border-top: none; margin-top: 1rem; }
-    .legal-wrap p  { margin-bottom: .875rem; line-height: 1.85; }
-    .legal-wrap ul { margin: .5rem 0 1rem 1.5rem; }
-    .legal-wrap ul li { margin-bottom: .4rem; font-size: .92rem; color: var(--text-mid); line-height: 1.7; }
-    .legal-wrap strong { color: var(--text); }
-    .legal-meta {
-      background: var(--sand);
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      font-size: .82rem;
-      color: var(--text-mid);
-      margin-bottom: 2rem;
+    .legal-body p {
+      margin-bottom: .9rem;
+      line-height: 1.75;
+      font-size: .9rem;
+      color: var(--text-mid, #4a3f30);
+    }
+    .legal-body ul, .legal-body ol {
+      margin: 0 0 1rem 1.4rem;
+      line-height: 1.75;
+      font-size: .9rem;
+      color: var(--text-mid, #4a3f30);
+    }
+    .legal-body li { margin-bottom: .35rem; }
+    .legal-body table {
+      width: 100%; border-collapse: collapse;
+      margin: 1rem 0 1.5rem; font-size: .85rem;
+    }
+    .legal-body th {
+      background: var(--sand, #f5f0e8);
+      padding: .6rem 1rem; text-align: left;
+      font-weight: 500; font-size: .78rem;
+      letter-spacing: .05em; text-transform: uppercase;
+      border-bottom: 2px solid var(--border, #e2d9cc);
+    }
+    .legal-body td {
+      padding: .6rem 1rem; border-bottom: 1px solid var(--border, #e2d9cc);
+    }
+    .legal-body strong { color: var(--text); }
+    .legal-toc {
+      background: var(--sand, #f5f0e8);
+      border: 1px solid var(--border, #e2d9cc);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .legal-toc p { margin: 0 0 .6rem; font-size: .8rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted, #8a7d6e); }
+    .legal-toc ol { margin: 0 0 0 1.2rem; }
+    .legal-toc li { margin-bottom: .25rem; }
+    .legal-toc a { color: var(--gold, #b8945a); font-size: .85rem; text-decoration: none; }
+    .legal-toc a:hover { text-decoration: underline; }
+    .info-box {
+      background: rgba(184,148,90,.08);
+      border-left: 3px solid var(--gold, #b8945a);
+      border-radius: 0 6px 6px 0;
+      padding: .9rem 1.1rem;
+      margin: 1rem 0 1.2rem;
+      font-size: .87rem;
+      line-height: 1.65;
+      color: var(--text-mid, #4a3f30);
     }
   </style>
 </head>
@@ -38,73 +94,201 @@
 
   <div id="site-header"></div>
 
-  <main>
-    <div class="page-banner">
-      <div class="container">
-        <span class="section-label">Právní dokumenty</span>
-        <h1>Obchodní podmínky</h1>
-      </div>
-    </div>
-
+  <div class="legal-hero">
     <div class="container">
-      <div class="legal-wrap">
+      <h1>Obchodní podmínky</h1>
+      <p>Platné od 1. 1. 2025 &nbsp;·&nbsp; Korálky &amp; Šperky</p>
+    </div>
+  </div>
 
-        <div class="legal-meta">
-          Platné od: 1. 1. 2025 &nbsp;|&nbsp;
-          Provozovatel: Korálky &amp; Šperky &nbsp;|&nbsp;
-          Kontakt: <a href="mailto:info@koralkyasperky.cz">info@koralkyasperky.cz</a>
-        </div>
+  <main>
+    <div class="legal-body">
 
-        <h2>1. Základní ustanovení</h2>
-        <p>Tyto obchodní podmínky (dále jen „OP") upravují vzájemná práva a povinnosti mezi prodávajícím a kupujícím při nákupu zboží prostřednictvím internetového obchodu provozovaného na adrese <strong>koralkyasperky.cz</strong>.</p>
-        <p>Prodávající: Korálky &amp; Šperky, kontaktní e-mail: info@koralkyasperky.cz</p>
-        <p>Kupující je každá fyzická nebo právnická osoba, která odešle objednávku prostřednictvím tohoto e-shopu.</p>
-
-        <h2>2. Objednávka a uzavření smlouvy</h2>
-        <p>Odesláním objednávky kupující potvrzuje, že se seznámil s těmito OP a souhlasí s nimi. Smlouva je uzavřena okamžikem potvrzení objednávky ze strany prodávajícího e-mailem.</p>
-        <p>Prodávající si vyhrazuje právo objednávku odmítnout, zejména pokud je zboží vyprodáno, nebo nelze-li kontaktovat kupujícího pro upřesnění.</p>
-
-        <h2>3. Ceny a platba</h2>
-        <p>Všechny ceny jsou uvedeny v českých korunách (Kč) včetně DPH. Prodávající není plátcem DPH.</p>
-        <p>Dostupné způsoby platby:</p>
-        <ul>
-          <li><strong>Bankovní převod</strong> — zboží odesíláme po připsání platby na účet (obvykle 1–2 pracovní dny)</li>
-          <li><strong>Dobírka</strong> — platba hotově nebo kartou při převzetí zásilky; příplatek 39 Kč</li>
-        </ul>
-
-        <h2>4. Doprava a doručení</h2>
-        <p>Objednávky expedujeme do 2 pracovních dnů od potvrzení objednávky (resp. od připsání platby u bankovního převodu).</p>
-        <ul>
-          <li><strong>Zásilkovna</strong> — 79 Kč, doručení 2–4 pracovní dny</li>
-          <li><strong>DPD kurýr</strong> — 109 Kč, doručení 1–3 pracovní dny</li>
-          <li><strong>Osobní odběr Praha</strong> — zdarma, po domluvě</li>
-          <li><strong>Doprava zdarma</strong> při objednávce nad 1 200 Kč</li>
-        </ul>
-        <p>Prodávající neodpovídá za prodlení způsobené dopravcem.</p>
-
-        <h2>5. Odstoupení od smlouvy</h2>
-        <p>Kupující – spotřebitel má právo odstoupit od smlouvy bez udání důvodu do <strong>14 dnů</strong> od převzetí zboží (§ 1829 občanského zákoníku).</p>
-        <p>Odstoupení zašlete e-mailem na info@koralkyasperky.cz. Zboží vraťte nepoužité, v původním obalu, na vlastní náklady. Kupní cenu vrátíme do 14 dnů od obdržení vráceného zboží.</p>
-        <p>Právo na odstoupení se nevztahuje na zboží zhotovené na zakázku podle přání kupujícího.</p>
-
-        <h2>6. Reklamace a záruka</h2>
-        <p>Na veškeré zboží se vztahuje zákonná záruční doba <strong>24 měsíců</strong> od převzetí.</p>
-        <p>Reklamaci uplatněte e-mailem na info@koralkyasperky.cz s popisem vady a fotografií. Reklamaci vyřídíme do 30 dnů.</p>
-        <p>Záruka se nevztahuje na:</p>
-        <ul>
-          <li>opotřebení způsobené běžným používáním</li>
-          <li>poškození způsobené nevhodnou péčí (kontakt s vodou, chemikáliemi)</li>
-          <li>mechanické poškození způsobené kupujícím</li>
-        </ul>
-
-        <h2>7. Ochrana osobních údajů</h2>
-        <p>Zpracování osobních údajů je upraveno samostatným dokumentem — <a href="privacy.html" style="color:var(--gold)">Zásady ochrany osobních údajů</a>.</p>
-
-        <h2>8. Závěrečná ustanovení</h2>
-        <p>Tyto OP jsou platné od 1. 1. 2025. Prodávající si vyhrazuje právo OP kdykoliv změnit. Právní vztahy se řídí právním řádem České republiky.</p>
-        <p>V případě sporu se spotřebitel může obrátit na Českou obchodní inspekci (<a href="https://www.coi.cz" target="_blank" rel="noopener" style="color:var(--gold)">coi.cz</a>).</p>
-
+      <div class="legal-toc">
+        <p>Obsah</p>
+        <ol>
+          <li><a href="#udaje">Základní údaje prodávajícího</a></li>
+          <li><a href="#objednavka">Objednávka a uzavření smlouvy</a></li>
+          <li><a href="#ceny">Ceny a platba</a></li>
+          <li><a href="#doprava">Doprava a dodání</a></li>
+          <li><a href="#odstoupeni">Odstoupení od smlouvy</a></li>
+          <li><a href="#reklamace">Reklamace a záruka</a></li>
+          <li><a href="#ochrana">Ochrana osobních údajů</a></li>
+          <li><a href="#mimosoudni">Mimosoudní řešení sporů</a></li>
+          <li><a href="#zaverecna">Závěrečná ustanovení</a></li>
+        </ol>
       </div>
+
+      <!-- 1 -->
+      <h2 id="udaje">1. Základní údaje prodávajícího</h2>
+      <p>
+        <strong>Korálky &amp; Šperky</strong><br>
+        Provozovatel: [Jméno a Příjmení]<br>
+        Sídlo: [Ulice a číslo, PSČ, Město]<br>
+        IČO: 000 00 000<br>
+        Nejsme plátci DPH.<br>
+        E-mail: <a href="mailto:info@koralkyasperky.cz">info@koralkyasperky.cz</a><br>
+        Telefon: +420 123 456 789
+      </p>
+      <p>
+        Tyto obchodní podmínky (dále jen „podmínky") upravují práva a povinnosti mezi prodávajícím
+        a kupujícím při prodeji zboží prostřednictvím internetového obchodu na adrese
+        <strong>wulf6.github.io/Koralky</strong> (dále jen „e-shop").
+      </p>
+
+      <!-- 2 -->
+      <h2 id="objednavka">2. Objednávka a uzavření smlouvy</h2>
+      <p>
+        Prezentace zboží v e-shopu je informativního charakteru a nepředstavuje návrh na uzavření
+        smlouvy ve smyslu § 1732 odst. 2 občanského zákoníku.
+      </p>
+      <p>
+        Objednávku provede kupující vložením zboží do košíku a vyplněním objednávkového formuláře.
+        Před odesláním objednávky má kupující možnost zkontrolovat a měnit zadané údaje.
+        Odesláním objednávky potvrzuje kupující správnost a úplnost zadaných údajů.
+      </p>
+      <p>
+        Smlouva je uzavřena okamžikem, kdy prodávající odešle kupujícímu potvrzení objednávky
+        na e-mailovou adresu uvedenou v objednávce. Prodávající si vyhrazuje právo odmítnout
+        objednávku, například z důvodu vyprodání skladových zásob.
+      </p>
+      <div class="info-box">
+        Všechny šperky jsou vyráběny ručně — každý kus je originálem. V případě vyprodání
+        konkrétního výrobku vás budeme co nejdříve informovat a nabídneme alternativu nebo vrácení platby.
+      </div>
+
+      <!-- 3 -->
+      <h2 id="ceny">3. Ceny a platba</h2>
+      <p>
+        Ceny zboží jsou uvedeny v českých korunách (Kč) a jsou konečné. Nejsme plátci DPH.
+      </p>
+      <h3>Způsoby platby</h3>
+      <ul>
+        <li>Bankovní převod na účet prodávajícího (zboží odesíláme po připsání platby)</li>
+        <li>Platba kartou online (Stripe / platební brána)</li>
+        <li>Dobírka (hotovost při převzetí od dopravce)</li>
+      </ul>
+      <p>
+        Faktura (daňový doklad) je přiložena k zásilce nebo zaslána e-mailem.
+      </p>
+
+      <!-- 4 -->
+      <h2 id="doprava">4. Doprava a dodání</h2>
+
+      <table>
+        <thead>
+          <tr><th>Způsob dopravy</th><th>Cena</th><th>Odhad doručení</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Zásilkovna</td><td>79 Kč</td><td>1–2 pracovní dny</td></tr>
+          <tr><td>DPD kurýr</td><td>109 Kč</td><td>1–2 pracovní dny</td></tr>
+          <tr><td>Osobní odběr – Praha</td><td>Zdarma</td><td>po domluvě</td></tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Doprava zdarma</strong> při objednávce nad 1 200 Kč (Zásilkovna nebo DPD dle výběru).
+      </p>
+      <p>
+        Zboží expedujeme zpravidla do 2 pracovních dnů od potvrzení objednávky (resp. od připsání
+        platby u bankovního převodu). O odeslání zásilky informujeme e-mailem včetně
+        sledovacího čísla.
+      </p>
+      <p>
+        Nebezpečí škody na zboží přechází na kupujícího převzetím zásilky.
+      </p>
+
+      <!-- 5 -->
+      <h2 id="odstoupeni">5. Odstoupení od smlouvy</h2>
+      <p>
+        Kupující – spotřebitel má právo odstoupit od smlouvy bez udání důvodu ve lhůtě
+        <strong>14 dnů</strong> od převzetí zboží (§ 1829 odst. 1 občanského zákoníku).
+      </p>
+      <h3>Jak postupovat</h3>
+      <ol>
+        <li>Informujte nás e-mailem na <a href="mailto:info@koralkyasperky.cz">info@koralkyasperky.cz</a>
+            s předmětem „Odstoupení od smlouvy" a číslem objednávky.</li>
+        <li>Zboží zabalte do původního nebo vhodného obalu tak, aby nedošlo k jeho poškození.</li>
+        <li>Zašlete zboží na naši adresu do 14 dnů od oznámení o odstoupení.</li>
+        <li>Náklady na vrácení zboží nese kupující.</li>
+      </ol>
+      <p>
+        Vrácené zboží musí být nepoužité, nepoškozené a v kompletním stavu. Peníze vrátíme
+        do 14 dnů od doručení vráceného zboží, stejným způsobem, jakým byla provedena původní platba.
+      </p>
+      <div class="info-box">
+        <strong>Pozor:</strong> Právo na odstoupení se nevztahuje na zboží zhotovené na zakázku
+        (šperky upravené dle přání zákazníka — např. jiná délka, gravírování, výběr kamenů).
+      </div>
+
+      <!-- 6 -->
+      <h2 id="reklamace">6. Reklamace a záruka</h2>
+      <p>
+        Na veškeré zboží se vztahuje zákonná záruční doba <strong>24 měsíců</strong>
+        od data převzetí kupujícím.
+      </p>
+      <h3>Co reklamace pokrývá</h3>
+      <ul>
+        <li>Výrobní vady materiálu (lámání drátků, praskání zapínání, uvolňování kamenů při běžném nošení)</li>
+        <li>Zjevné odchylky od popsaných vlastností</li>
+        <li>Poškození vzniklé při přepravě</li>
+      </ul>
+      <h3>Co reklamace nepokrývá</h3>
+      <ul>
+        <li>Opotřebení způsobené běžným používáním</li>
+        <li>Poškození způsobené nevhodným zacházením (kontakt s vodou, chemikáliemi, kosmetikou)</li>
+        <li>Mechanické poškození vzniklé kupujícím</li>
+        <li>Přirozené změny přírodních kamenů (barva, textura)</li>
+      </ul>
+      <h3>Jak reklamovat</h3>
+      <ol>
+        <li>Kontaktujte nás e-mailem na <a href="mailto:info@koralkyasperky.cz">info@koralkyasperky.cz</a>
+            s popisem závady a fotografií.</li>
+        <li>Dohodněme se na dalším postupu — zaslání zboží nebo osobní předání.</li>
+        <li>Reklamaci vyřídíme do 30 dnů od jejího uplatnění.</li>
+      </ol>
+      <p>
+        V případě oprávněné reklamace máte právo na bezplatnou opravu, výměnu zboží, slevu z ceny
+        nebo — nelze-li závadu odstranit — na vrácení peněz.
+      </p>
+      <div class="info-box">
+        <strong>Péče o šperky:</strong> Doporučujeme ukládat šperky odděleně, chránit je před vlhkostí,
+        kosmetikou a parfémem. Přírodní kameny mohou časem mírně měnit odstín — to není vada zboží.
+      </div>
+
+      <!-- 7 -->
+      <h2 id="ochrana">7. Ochrana osobních údajů</h2>
+      <p>
+        Osobní údaje zpracováváme výhradně za účelem vyřízení objednávky a plnění zákonných povinností.
+        Podrobné informace naleznete v&nbsp;<a href="privacy.html">Zásadách ochrany osobních údajů</a>.
+      </p>
+
+      <!-- 8 -->
+      <h2 id="mimosoudni">8. Mimosoudní řešení sporů</h2>
+      <p>
+        Kupující – spotřebitel má právo na mimosoudní řešení spotřebitelského sporu.
+        K mimosoudnímu řešení je příslušná <strong>Česká obchodní inspekce (ČOI)</strong>,
+        Štěpánská 567/15, 120 00 Praha 2, <a href="https://www.coi.cz" target="_blank">www.coi.cz</a>.
+      </p>
+      <p>
+        Spotřebitel může rovněž využít platformu pro řešení sporů online dostupnou na
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a>.
+      </p>
+
+      <!-- 9 -->
+      <h2 id="zaverecna">9. Závěrečná ustanovení</h2>
+      <p>
+        Tyto podmínky jsou platné a účinné od 1. 1. 2025. Prodávající si vyhrazuje právo podmínky
+        měnit; nová verze je účinná dnem zveřejnění na e-shopu.
+      </p>
+      <p>
+        Právní vztahy výslovně neupravené těmito podmínkami se řídí příslušnými ustanoveními
+        občanského zákoníku (zákon č. 89/2012 Sb.) a zákona o ochraně spotřebitele
+        (zákon č. 634/1992 Sb.).
+      </p>
+      <p>
+        Případné spory mezi prodávajícím a kupujícím řeší věcně a místně příslušný soud České republiky.
+      </p>
     </div>
   </main>
 
