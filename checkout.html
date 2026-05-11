@@ -166,7 +166,7 @@
             <input type="hidden" name="shipping_method" id="shipping-field" value="zasilkovna">
             <input type="hidden" name="payment_method" id="payment-field" value="bank">
             <input type="hidden" name="order_total" id="total-field">
-            <input type="hidden" name="bank_account" value="DOPLŇ_ČÍSLO_ÚČTU/KÓDBANKA">
+            <input type="hidden" name="bank_account" id="bank-account-field" value="">
 
             <!-- Kontaktní údaje -->
             <div class="checkout-block">
@@ -245,7 +245,7 @@
               <!-- Bankovní údaje — zobrazí se při výběru převodu -->
               <div class="bank-info visible" id="bank-info-box">
                 <strong>Platební údaje</strong>
-                <div class="bank-number" id="bank-number-display">DOPLŇ_ČÍSLO_ÚČTU/KÓDBANKA</div>
+                <div class="bank-number" id="bank-number-display">Načítám…</div>
                 <p>Číslo účtu si prosím poznamenejte — pošleme ho také na váš e-mail po odeslání objednávky.</p>
                 <p>Do zprávy pro příjemce uveďte vaše <strong>příjmení</strong>.</p>
               </div>
@@ -292,16 +292,24 @@
   <div id="site-footer"></div>
 
   <script>
-    /* ── NASTAV ČÍSLO ÚČTU ZDE ── */
-    const BANK_ACCOUNT = 'DOPLŇ_ČÍSLO_ÚČTU/KÓDBANKA'; /* např. 1234567890/0800 */
+    /* Číslo účtu se načítá z settings.json přes CONFIG (admin → Obchod & kontakt) */
 
     let selectedShipping = null;
     let isCOD = false;
 
     function initCheckout() {
-      /* Nastav číslo účtu */
-      document.getElementById('bank-number-display').textContent = BANK_ACCOUNT;
-      document.querySelector('input[name="bank_account"]').value = BANK_ACCOUNT;
+      /* Nastav číslo účtu z settings.json */
+      const bankAccount = CONFIG.shop?.bankAccount || '';
+      const bankDisplay = document.getElementById('bank-number-display');
+      const bankInput   = document.querySelector('input[name="bank_account"]');
+      if (bankAccount) {
+        bankDisplay.textContent = bankAccount;
+        if (bankInput) bankInput.value = bankAccount;
+      } else {
+        bankDisplay.textContent = 'Číslo účtu bude upřesněno v potvrzovacím e-mailu.';
+        bankDisplay.style.fontSize = '.88rem';
+        bankDisplay.style.fontFamily = 'inherit';
+      }
 
       const items = Cart.get();
       if (!items.length) { window.location.href = 'cart.html'; return; }

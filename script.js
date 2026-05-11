@@ -22,6 +22,7 @@ const CONFIG = {
     phone:     '+420 123 456 789',
     address:   '',
     formspree: 'mnjwzlpl',
+    bankAccount: '',
     instagram: '',
     facebook:  '',
   },
