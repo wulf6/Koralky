@@ -3,153 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ochrana osobních údajů — Korálky &amp; Šperky</title>
+  <title>Ochrana osobních údajů — Korálky & Šperky</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <style>
-    .legal-wrap { max-width: 780px; margin: 0 auto; padding: 3rem 0 6rem; }
-    .legal-wrap h2 { font-size: 1.4rem; margin: 2.5rem 0 .75rem; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text); }
-    .legal-wrap h2:first-of-type { border-top: none; margin-top: 1rem; }
-    .legal-wrap h3 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
-    .legal-wrap p, .legal-wrap li { font-size: .92rem; color: var(--text-mid); line-height: 1.8; }
-    .legal-wrap ul, .legal-wrap ol { padding-left: 1.4rem; margin-bottom: .75rem; }
-    .legal-back { display: inline-flex; align-items: center; gap: .5rem; color: var(--gold); font-size: .82rem; margin-bottom: 2rem; }
+    .legal-hero { background: var(--text); color: var(--cream); padding: 3.5rem 0 2.5rem; }
+    .legal-hero h1 { font-family: var(--font-serif); color: var(--sand); margin-bottom: .5rem; }
+    .legal-hero p  { color: rgba(232,220,200,.55); font-size: .85rem; }
+    .legal-body { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    .legal-body h2 {
+      font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600;
+      margin: 2.5rem 0 .75rem; padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border); color: var(--text);
+    }
+    .legal-body h2:first-child { margin-top: 0; }
+    .legal-body h3 { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; margin: 1.5rem 0 .5rem; }
+    .legal-body p  { margin-bottom: .9rem; line-height: 1.75; font-size: .9rem; color: var(--text-mid, #4a3f30); }
+    .legal-body ul { margin: 0 0 1rem 1.4rem; line-height: 1.75; font-size: .9rem; color: var(--text-mid, #4a3f30); }
+    .legal-body li { margin-bottom: .35rem; }
+    .legal-body strong { color: var(--text); }
+    .legal-body a { color: var(--gold); }
+    .info-box {
+      background: rgba(184,148,90,.08); border-left: 3px solid var(--gold);
+      border-radius: 0 6px 6px 0; padding: .9rem 1.1rem;
+      margin: 1rem 0 1.2rem; font-size: .87rem; line-height: 1.65;
+      color: var(--text-mid, #4a3f30);
+    }
   </style>
 </head>
 <body>
-  <header class="site-header" id="site-header"></header>
 
-  <main style="padding: 0 1.5rem">
-    <div class="legal-wrap">
+  <div id="site-header"></div>
 
-      <a href="index.html" class="legal-back">← Zpět na úvodní stránku</a>
+  <div class="legal-hero">
+    <div class="container">
+      <h1>Ochrana osobních údajů</h1>
+      <p>Platné od 1. 1. 2025 &nbsp;·&nbsp; Korálky &amp; Šperky</p>
+    </div>
+  </div>
 
-      <h1 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:400;margin-bottom:.5rem">
-        Ochrana osobních údajů
-      </h1>
-      <p style="color:var(--text-light);font-size:.82rem;margin-bottom:2rem">
-        Platné od 1. 1. 2024 &nbsp;·&nbsp; Korálky &amp; Šperky
-      </p>
+  <main>
+    <div class="legal-body">
 
       <h2>1. Správce osobních údajů</h2>
       <p>
-        Správcem vašich osobních údajů je provozovatel e-shopu <strong>Korálky &amp; Šperky</strong>,
-        fyzická nebo právnická osoba provozující tento internetový obchod na doméně, na které byl tento
-        dokument zveřejněn (dále jen „správce" nebo „my").
-      </p>
-      <p>
-        Kontaktní e-mail správce: <strong>info@koralkyasperky.cz</strong>
+        Správcem osobních údajů je:<br>
+        <strong>Korálky &amp; Šperky</strong> — [Jméno a Příjmení]<br>
+        IČO: <span data-setting="ico">000 00 000</span><br>
+        E-mail: <a href="mailto:info@koralkyasperky.cz" data-setting="email">info@koralkyasperky.cz</a><br>
+        Telefon: <span data-setting="phone">+420 123 456 789</span>
       </p>
 
       <h2>2. Jaké osobní údaje zpracováváme</h2>
-      <p>Při nákupu nebo kontaktu s námi zpracováváme tyto kategorie osobních údajů:</p>
+      <p>V rámci provozu e-shopu zpracováváme tyto osobní údaje:</p>
       <ul>
-        <li><strong>Identifikační údaje</strong> — jméno a příjmení</li>
-        <li><strong>Kontaktní údaje</strong> — e-mailová adresa, telefonní číslo</li>
-        <li><strong>Doručovací a fakturační adresa</strong> — ulice, město, PSČ, stát</li>
-        <li><strong>Údaje o objednávce</strong> — zakoupené produkty, cena, způsob platby a doručení</li>
-        <li><strong>Komunikace</strong> — zprávy zaslané přes kontaktní formulář nebo e-mail</li>
+        <li><strong>Identifikační údaje:</strong> jméno a příjmení</li>
+        <li><strong>Kontaktní údaje:</strong> e-mailová adresa, telefonní číslo</li>
+        <li><strong>Doručovací údaje:</strong> doručovací adresa</li>
+        <li><strong>Platební údaje:</strong> informace o způsobu platby (číslo účtu zpracovává banka, ne my)</li>
+        <li><strong>Provozní údaje:</strong> obsah košíku (uložen lokálně ve vašem prohlížeči)</li>
       </ul>
-      <p>
-        Nezpracováváme žádné citlivé osobní údaje (zdravotní stav, politické názory apod.)
-        ani údaje o platebních kartách (platby probíhají přes zabezpečené platební brány třetích stran).
-      </p>
+
+      <div class="info-box">
+        <strong>Nepoužíváme sledovací cookies ani analytické nástroje.</strong>
+        Váš košík a souhlas s cookies jsou uloženy výhradně ve vašem prohlížeči (localStorage) a neopouštějí vaše zařízení.
+      </div>
 
       <h2>3. Účel a právní základ zpracování</h2>
-
-      <h3>a) Plnění smlouvy (čl. 6 odst. 1 písm. b GDPR)</h3>
+      <h3>Vyřízení objednávky</h3>
       <p>
-        Vaše údaje potřebujeme k tomu, abychom mohli přijmout a zpracovat objednávku, doručit zásilku
-        a zajistit záruční a reklamační servis. Bez těchto údajů nelze objednávku vyřídit.
+        Osobní údaje zpracováváme za účelem uzavření a plnění kupní smlouvy (čl. 6 odst. 1 písm. b GDPR).
+        Bez těchto údajů nelze objednávku zpracovat ani doručit.
+      </p>
+      <h3>Zákonné povinnosti</h3>
+      <p>
+        Fakturační a účetní údaje uchováváme po dobu stanovenou zákonem (5–10 let) na základě
+        čl. 6 odst. 1 písm. c GDPR.
+      </p>
+      <h3>Newsletter (pouze se souhlasem)</h3>
+      <p>
+        Pokud jste se přihlásili k newsletteru, zpracováváme váš e-mail na základě vašeho souhlasu
+        (čl. 6 odst. 1 písm. a GDPR). Souhlas lze kdykoli odvolat odpovědí na libovolný newsletter.
       </p>
 
-      <h3>b) Plnění právních povinností (čl. 6 odst. 1 písm. c GDPR)</h3>
-      <p>
-        Fakturační údaje uchováváme po dobu stanovenou daňovými a účetními předpisy (zpravidla 10 let).
-      </p>
-
-      <h3>c) Oprávněný zájem (čl. 6 odst. 1 písm. f GDPR)</h3>
-      <p>
-        Kontaktní e-mail může být použit k zaslání zpětné vazby k objednávce nebo k informování
-        o podobných produktech (náramky, náhrdelníky, náušnice). Zasílání lze kdykoliv odmítnout.
-      </p>
-
-      <h3>d) Souhlas (čl. 6 odst. 1 písm. a GDPR)</h3>
-      <p>
-        Pokud se přihlásíte k odběru novinek, zpracováváme váš e-mail na základě vašeho souhlasu,
-        který můžete kdykoliv odvolat.
-      </p>
-
-      <h2>4. Doba uchovávání údajů</h2>
+      <h2>4. Příjemci osobních údajů</h2>
+      <p>Vaše osobní údaje předáváme pouze těmto třetím stranám v rozsahu nezbytném pro doručení:</p>
       <ul>
-        <li>Údaje k objednávce: <strong>5 let</strong> od jejího splnění (pro případ reklamace)</li>
-        <li>Daňové doklady: <strong>10 let</strong> dle zákona o účetnictví</li>
-        <li>Souhlas s newsletterem: po dobu trvání souhlasu, nejdéle <strong>3 roky</strong> od posledního nákupu</li>
-        <li>Zprávy z kontaktního formuláře: <strong>2 roky</strong> od jejich doručení</li>
+        <li><strong>Zásilkovna s.r.o.</strong> — pro doručení zásilky</li>
+        <li><strong>DPD CZ s.r.o.</strong> — pro doručení zásilky</li>
+        <li><strong>Formspree Inc.</strong> — zpracování objednávkového formuláře (server v EU/USA, Privacy Shield)</li>
+      </ul>
+      <p>Osobní údaje neprodáváme ani nepředáváme třetím stranám pro marketingové účely.</p>
+
+      <h2>5. Doba uchování údajů</h2>
+      <ul>
+        <li>Údaje z objednávky: po dobu trvání záruky + 3 roky</li>
+        <li>Fakturační doklady: 10 let dle zákona o účetnictví</li>
+        <li>Newsletterové souhlasy: do odvolání souhlasu</li>
       </ul>
 
-      <h2>5. Příjemci osobních údajů</h2>
-      <p>
-        Vaše osobní údaje předáváme pouze v rozsahu nezbytném pro splnění objednávky těmto kategoriím
-        příjemců:
-      </p>
+      <h2>6. Vaše práva</h2>
+      <p>Jako subjekt údajů máte právo:</p>
       <ul>
-        <li><strong>Přepravci a zásilkovny</strong> — Zásilkovna, DPD, Česká pošta (jméno, adresa, telefon)</li>
-        <li><strong>Platební brána</strong> — při online platbě kartou (jen potřebné transakční údaje)</li>
-        <li><strong>Účetní a daňový poradce</strong> — identifikační a fakturační údaje</li>
-        <li><strong>Poskytovatel e-mailové služby</strong> — Formspree nebo obdobná služba pro doručení potvrzení objednávky</li>
+        <li><strong>Na přístup</strong> — požádat o kopii vámi poskytnutých údajů</li>
+        <li><strong>Na opravu</strong> — opravit nepřesné osobní údaje</li>
+        <li><strong>Na výmaz</strong> — požádat o smazání (pokud nejsou potřeba pro zákonné povinnosti)</li>
+        <li><strong>Na přenositelnost</strong> — obdržet data ve strojově čitelném formátu</li>
+        <li><strong>Na omezení zpracování</strong> — omezit zpracování v zákonem stanovených případech</li>
+        <li><strong>Vznést námitku</strong> — proti zpracování na základě oprávněného zájmu</li>
+        <li><strong>Odvolat souhlas</strong> — kdykoli bez udání důvodu (platí pro newsletter)</li>
       </ul>
       <p>
-        Žádnému z příjemců neprodáváme ani neposkytujeme vaše údaje pro jejich vlastní marketingové účely.
+        Pro uplatnění práv nás kontaktujte na
+        <a href="mailto:info@koralkyasperky.cz" data-setting="email">info@koralkyasperky.cz</a>.
+        Na vaši žádost odpovíme do 30 dnů.
       </p>
 
-      <h2>6. Předávání do třetích zemí</h2>
+      <h2>7. Stížnost u dozorového úřadu</h2>
       <p>
-        Osobní údaje zpracováváme primárně v rámci Evropského hospodářského prostoru (EHP).
-        Pokud dochází k předání mimo EHP (např. u cloudových služeb se servery v USA), děje se tak
-        pouze na základě standardních smluvních doložek schválených Evropskou komisí.
+        Máte právo podat stížnost u Úřadu pro ochranu osobních údajů (ÚOOÚ):
+        <a href="https://www.uoou.cz" target="_blank">www.uoou.cz</a>,
+        Pplk. Sochora 27, 170 00 Praha 7.
       </p>
 
-      <h2>7. Vaše práva</h2>
-      <p>Ve vztahu ke svým osobním údajům máte tato práva:</p>
+      <h2>8. Cookies</h2>
+      <p>
+        Tento web používá výhradně <strong>nezbytné cookies</strong> uložené ve vašem prohlížeči:
+      </p>
       <ul>
-        <li><strong>Právo na přístup</strong> — kdykoli nás můžete požádat o potvrzení, zda zpracováváme vaše údaje, a o jejich kopii.</li>
-        <li><strong>Právo na opravu</strong> — pokud jsou vaše údaje nepřesné, opravíme je.</li>
-        <li><strong>Právo na výmaz</strong> — za podmínek GDPR můžete požádat o smazání údajů.</li>
-        <li><strong>Právo na omezení zpracování</strong> — v zákonem stanovených případech můžete požádat o pozastavení zpracování.</li>
-        <li><strong>Právo na přenositelnost</strong> — údaje, které nám poskytujete automatizovaně na základě smlouvy nebo souhlasu, vám poskytneme ve strojově čitelném formátu.</li>
-        <li><strong>Právo vznést námitku</strong> — proti zpracování na základě oprávněného zájmu (zejm. přímý marketing).</li>
-        <li><strong>Právo odvolat souhlas</strong> — pokud je zpracování založeno na souhlasu, můžete jej kdykoli odvolat (odhlášením z newsletteru nebo e-mailem).</li>
+        <li><code>koralky_cart</code> — obsah košíku (localStorage, vymaže se smazáním dat prohlížeče)</li>
+        <li><code>koralky_cookies_accepted</code> — souhlas s cookie lištou (localStorage)</li>
       </ul>
       <p>
-        Svá práva uplatňujte na e-mailové adrese <strong>info@koralkyasperky.cz</strong>.
-        Na vaši žádost odpovíme do 30 dnů. Pokud se domníváte, že zpracováváme vaše údaje v rozporu
-        s právními předpisy, máte právo podat stížnost u dozorového úřadu —
-        <strong>Úřadu pro ochranu osobních údajů</strong> (www.uoou.cz).
-      </p>
-
-      <h2>8. Soubory cookie</h2>
-      <p>
-        Tento web může využívat technické soubory cookie nezbytné pro správné fungování stránek
-        (např. obsah košíku). Analytické ani marketingové cookies bez vašeho souhlasu nepoužíváme.
+        Nepoužíváme Google Analytics, Facebook Pixel ani žádné jiné sledovací nástroje.
       </p>
 
       <h2>9. Zabezpečení</h2>
       <p>
-        Veškerá komunikace mezi vaším prohlížečem a naším webem probíhá šifrovaně přes protokol HTTPS.
-        Přístup k osobním údajům je omezen pouze na oprávněné osoby vázané povinností mlčenlivosti.
+        Web běží na HTTPS. Platby jsou zpracovávány platební bránou — čísla karet se k nám nedostávají.
+        Objednávkové formuláře jsou odesílány přes Formspree s šifrovaným přenosem.
       </p>
 
-      <h2>10. Změny tohoto dokumentu</h2>
+      <h2>10. Změny zásad</h2>
       <p>
-        Zásady ochrany osobních údajů můžeme průběžně aktualizovat. O podstatných změnách vás budeme
-        informovat e-mailem nebo oznámením na webu. Aktuální verze je vždy dostupná na této stránce.
+        Tyto zásady jsou platné od 1. 1. 2025. O podstatných změnách vás informujeme e-mailem
+        (pokud nám ho máte zadaný). Aktuální verze je vždy dostupná na této stránce.
       </p>
 
     </div>
   </main>
 
-  <footer class="site-footer" id="site-footer"></footer>
+  <div id="site-footer"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
